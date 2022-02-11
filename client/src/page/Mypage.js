@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 const BoxContainer = styled.div`
-  max-width: 1450px;
+  max-width: 2000px;
   margin: auto;
   @media screen and (max-width: 480px) {
     width: 100%;

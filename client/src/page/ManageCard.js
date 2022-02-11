@@ -88,6 +88,9 @@ const Btn = styled.button`
     height: 100%;
     background: rgba(0, 0, 0, 0.05);
   }
+  @media screen and (max-width: 768px) {
+    width: 80px;
+  }
 `;
 
 // 이 페이지가 딱 켜지면 수조 정보 조회 요청을 딱 보내야함

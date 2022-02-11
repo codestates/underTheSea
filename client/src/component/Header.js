@@ -12,7 +12,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 const Container = styled.div`
-  width: 100vw;
+  max-width: 2000px;
   height: 10vh;
   background: #d2f7ff;
   box-shadow: 0px 0px 5px #adb5bd;

@@ -42,12 +42,10 @@ const Title = styled.div`
   font-weight: bold;
   font-size: 2.5rem;
   .main {
-    z-index: 99;
     font-weight: bold;
     font-size: 2.5rem;
   }
   .sub {
-    z-index: 99;
     margin-top: 15px;
     font-size: 1.25rem;
     font-weight: 500;
@@ -59,6 +57,7 @@ const Title = styled.div`
 `;
 const Img = styled.img`
   position: absolute;
+  z-index: -1;
   top: 0;
   left: 0;
   width: 100%;

@@ -10,7 +10,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
-  max-width: 1450px;
+  max-width: 2000px;
   height: 125vh;
   margin: auto;
   border-bottom: 1px solid black;

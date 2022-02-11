@@ -32,7 +32,7 @@ const Container = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  max-width: 1450px;
+  max-width: 2000px;
   height: 40vh;
   @media screen and (max-width: 480px) {
     height: 20vh;
@@ -89,7 +89,7 @@ const ContainerS = styled.div`
   margin-bottom: 3%;
   @media screen and (max-width: 480px) {
     width: 70%;
-    height: 15vh;
+    height: 18vh;
   }
 `;
 const HabitatContainer = styled.div`
@@ -172,6 +172,7 @@ const LeftInfo = styled.div`
   @media screen and (max-width: 480px) {
     height: 100%;
     font-size: 0.7rem;
+    padding: 0px;
   }
 `;
 const ImgD = styled.img`
@@ -263,6 +264,7 @@ const Levelinfo = styled.div`
   margin-left: 10px;
   font-family: "Kfont";
 `;
+
 const ImgContainer = styled.div`
   width: 50%;
   height: 40%;
@@ -354,6 +356,7 @@ const ProgressBar = styled.div`
   border: 2px solid #108dee;
   @media screen and (max-width: 480px) {
     width: 70%;
+    margin-bottom: 5px;
   }
 `;
 const Progress = styled.div`
@@ -415,6 +418,9 @@ const CalendarContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 480px) {
+    width: 70%;
+  }
 `;
 
 const Control = styled.div`
@@ -431,13 +437,22 @@ const CalendarBtn = styled.button`
   width: 40px;
   height: 30px;
   border-style: none;
+  /* @media screen and (max-width: 480px) {
+    border-bottom: 1px solid black;
+  } */
 `;
 
 const Span = styled.span`
   font-size: 1.5rem;
 `;
 
-const Table = styled.table``;
+const Table = styled.table`
+  @media screen and (max-width: 480px) {
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    width: 100%;
+  }
+`;
 
 const Tbody = styled.tbody``;
 
@@ -447,12 +462,17 @@ const Tr = styled.tr`
 `;
 const Number = styled.span`
   box-sizing: border-box;
+
   padding-left: 5px;
   display: flex;
   width: 100%;
   height: 20px;
   @media screen and (max-width: 480px) {
     font-size: 1.25rem;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0px;
   }
 `;
 
@@ -466,7 +486,8 @@ const Td = styled.td`
   width: 6.8vw;
   height: 13vh;
   @media screen and (max-width: 480px) {
-    display: none;
+    width: 100%;
+    border-style: none;
   }
 `;
 
@@ -482,7 +503,7 @@ const MobileTd = styled.td`
   height: 13vh;
   @media screen and (max-width: 480px) {
     width: 70vw;
-    height: 30vh;
+    height: 40vh;
     justify-content: space-around;
   }
 `;
@@ -500,7 +521,10 @@ const WeekContainer = styled.div`
     color: blue;
   }
   @media screen and (max-width: 480px) {
-    display: none;
+    width: 95%;
+  }
+  @media screen and (max-width: 350px) {
+    width: 95%;
   }
 `;
 const Day = styled.div`
@@ -509,6 +533,12 @@ const Day = styled.div`
   text-align: center;
   width: 7vw;
   height: 3vh;
+  @media screen and (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+  @media screen and (max-width: 350px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const FoodIconContainer = styled.div`
@@ -516,6 +546,9 @@ const FoodIconContainer = styled.div`
   flex-direction: column;
   width: 100%;
   height: 40%;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const FoodInnerContainer = styled.div`
@@ -532,6 +565,9 @@ const ExWaterRecord = styled.div`
   border: 1px solid gray;
   border-radius: 4px;
   margin-top: 2px;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const FoodTypeAndNum = styled.div`
@@ -615,7 +651,7 @@ function ManageDetail({ condata, setCondata }) {
   const UpdateConInfo = async () => {
     await axios
       .get(
-        `${process.env.REACT_APP_SERVER_API}/container/${container_id}/${month}`,
+        `${process.env.REACT_APP_SERVER_API}/info/container/${container_id}/${month}`,
         {
           headers: { authorization: `Bearer ${accessToken}` },
           withCredentials: true,
@@ -656,6 +692,8 @@ function ManageDetail({ condata, setCondata }) {
         withCredentials: true,
       }
     );
+    console.log("container 아이디", container_id);
+    console.log("응답", response);
     localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     setCondata(response.data.data);
     conInfo = JSON.parse(localStorage.getItem("conInfo"));
@@ -816,7 +854,7 @@ function ManageDetail({ condata, setCondata }) {
               if (moment().format("YYYYMMDD") === days.format("YYYYMMDD")) {
                 //오늘이고 기록도 있을때
                 return (
-                  <MobileTd key={index}>
+                  <Td key={index}>
                     <Number style={{ color: "#108dee" }}>
                       {days.format("D")}
                     </Number>
@@ -861,7 +899,7 @@ function ManageDetail({ condata, setCondata }) {
                     <ExWaterRecord>
                       {exWaterObj[days.format("YYMMDD")]}L
                     </ExWaterRecord>
-                  </MobileTd>
+                  </Td>
                 );
               } else if (finalList[days.format("YYMMDD")]) {
                 //오늘은 아니지만 기록이 있을 때

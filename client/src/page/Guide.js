@@ -4,7 +4,7 @@ import React from "react";
 import Header2 from "../component/Header2";
 
 const Container = styled.div`
-  width: 100vw;
+  max-width: 2000px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,6 +13,7 @@ const Container = styled.div`
 const MiddleContainer = styled.div`
   display: flex;
   overflow: hidden;
+  max-width: 2000px;
   @media screen and (max-width: 900px) {
     flex-direction: column;
   }
@@ -107,7 +108,7 @@ const TextForm2 = styled.div`
 `;
 
 const Seawater = styled.div`
-  width: 33vw;
+  width: 33%;
   height: 90vh;
   /* border: 1px solid red; */
   display: flex;
@@ -122,7 +123,7 @@ const Seawater = styled.div`
 
 const Tips = styled.div`
   position: relative;
-  width: 34vw;
+  width: 34%;
   height: 90vh;
   /* border: 1px solid red; */
   display: flex;
@@ -154,7 +155,7 @@ const FreshImg = styled.img`
   opacity: 0.4;
 `;
 const Freshwater = styled.div`
-  width: 33vw;
+  width: 33%;
   height: 90vh;
   /* border: 1px solid red; */
   display: flex;

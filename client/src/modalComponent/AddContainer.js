@@ -83,6 +83,7 @@ const Input = styled.input`
   width: 100%;
   height: 30px;
 `;
+
 const SizeInput = styled.input`
   box-sizing: border-box;
   padding: 5px;
@@ -134,9 +135,9 @@ const Selection = styled.label`
 const SelImg = styled.img`
   display: flex;
   justify-content: space-evenly;
-  width: 80px;
+  width: 100%;
   @media screen and (max-width: 768px) {
-    width: 40px;
+    width: 100%;
   }
 `;
 
@@ -248,7 +249,6 @@ function AddContainer() {
                   src={process.env.REACT_APP_SERVER_API + `/level/11`}
                   alt="Type A"
                 />
-
                 <input
                   type="radio"
                   name="type"
@@ -261,7 +261,6 @@ function AddContainer() {
                   src={process.env.REACT_APP_SERVER_API + `/level/12`}
                   alt="Type B"
                 />
-
                 <input
                   type="radio"
                   name="type"
@@ -275,7 +274,6 @@ function AddContainer() {
                   src={process.env.REACT_APP_SERVER_API + `/level/13`}
                   alt="Type C"
                 />
-
                 <input
                   type="radio"
                   name="type"
@@ -288,7 +286,6 @@ function AddContainer() {
                   src={process.env.REACT_APP_SERVER_API + `/level/14`}
                   alt="Type D"
                 />
-
                 <input
                   type="radio"
                   name="type"

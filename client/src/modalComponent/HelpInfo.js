@@ -29,7 +29,9 @@ const ModalContainer = styled.div`
   display: flex;
   border-radius: 20px;
   @media screen and (max-width: 820px) {
-    height: 85%;
+    width: 80%;
+    height: 70%;
+    overflow: scroll;
   }
 `;
 const CloseBtnContainer = styled.div`
@@ -85,6 +87,9 @@ const Content = styled.section`
 `;
 const ImgShow = styled.img`
   width: 45%;
+  @media screen and (max-width: 820px) {
+    width: 43%;
+  }
 `;
 const ImgCover = styled.div`
   width: 90%;

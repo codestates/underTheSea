@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 
 const Container = styled.div`
-  max-width: 1920px;
+  max-width: 2000px;
   height: 90vh;
   margin: auto;
   background: linear-gradient(to top, #70d6ff, #d2f7ff);

@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 gsap.registerPlugin(ScrollTrigger);
 
 const Container = styled.div`
-  max-width: 1450px;
+  max-width: 2000px;
   height: 120vh;
   margin: auto;
   display: flex;

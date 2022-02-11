@@ -80,7 +80,6 @@ const Content = styled.div`
 `;
 
 const DeleteBtn = styled.div`
-  /* border: 1px solid red; */
   position: absolute;
   top: 2%;
   right: 5%;
@@ -93,8 +92,6 @@ const DeleteBtn = styled.div`
 const ContainerInfoBox = styled.div`
   width: 90%;
   height: 80%;
-  /* border: 1px dashed red; */
-  /* line-height: 250%; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -114,7 +111,6 @@ const TextCover = styled.div`
   width: 90%;
   display: flex;
   border-radius: 5px;
-  /* border: 1px solid black; */
 `;
 
 const Text = styled.div`
@@ -124,6 +120,9 @@ const Text = styled.div`
   width: 40%;
   font-weight: 600;
   font-size: 1.1rem;
+  @media screen and (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const Size = styled.div`
@@ -134,6 +133,9 @@ const Size = styled.div`
   font-weight: 600;
   border-radius: 5px;
   background: #e1e1e1;
+  @media screen and (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const Theme = styled.div`
@@ -145,6 +147,9 @@ const Theme = styled.div`
   border-radius: 5px;
   padding-bottom: 1%;
   background: #e1e1e1;
+  @media screen and (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 function ManageInfo({ id, name, size, theme, level, handleCondata }) {

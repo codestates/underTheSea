@@ -27,6 +27,9 @@ const ModalContainer = styled.div`
   display: flex;
   border-radius: 20px;
   align-items: center;
+  @media screen and (max-width: 480px) {
+    width: 60%;
+  }
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
