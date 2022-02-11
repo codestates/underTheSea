@@ -6,6 +6,9 @@ const Container = styled.div`
   border-bottom: 1px solid black;
   background: #464646;
   position: relative;
+  @media screen and (max-width: 480px) {
+    height: 85vh;
+  }
 `;
 
 const LogoTag = styled.img`
@@ -13,10 +16,16 @@ const LogoTag = styled.img`
   top: 20%;
   left: 8%;
   width: 13vw;
-  z-index: 999;
+  @media screen and (max-width: 480px) {
+    width: 30vw;
+    font-size: 0.9rem;
+    top: 10%;
+    left: 35%;
+  }
 `;
 const AboutTag = styled.div`
   position: absolute;
+  display: block;
   top: 25%;
   left: 35%;
   line-height: 170%;
@@ -32,6 +41,16 @@ const AboutTag = styled.div`
     color: #9ce6ff;
     text-decoration: underline;
   }
+  @media screen and (max-width: 480px) {
+    width: 20vw;
+    font-size: 0.9rem;
+    top: 25%;
+    left: 3%;
+    #repo {
+      width: 20vw;
+      font-size: 0.9rem;
+    }
+  }
 `;
 const NameTag = styled.div`
   position: absolute;
@@ -40,6 +59,13 @@ const NameTag = styled.div`
   color: white;
   line-height: 170%;
   font-size: 1rem;
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.9rem;
+    top: 40%;
+    left: 3%;
+    line-height: 300%;
+  }
 `;
 const LinkTag = styled.div`
   position: absolute;
@@ -49,6 +75,7 @@ const LinkTag = styled.div`
   flex-direction: column;
   line-height: 170%;
   font-size: 1rem;
+  flex-wrap: wrap;
   #link1 {
     color: white;
     text-decoration: none;
@@ -83,18 +110,48 @@ const LinkTag = styled.div`
     color: #9ce6ff;
     text-decoration: underline;
   }
+
+  @media screen and (max-width: 480px) {
+    top: 40%;
+    line-height: 270%;
+    left: 19%;
+    #link1 {
+      font-size: 0.9rem;
+    }
+
+    #link2 {
+      font-size: 0.9rem;
+    }
+
+    #link3 {
+      font-size: 0.9rem;
+    }
+
+    #link4 {
+      font-size: 0.9rem;
+    }
+  }
 `;
 const Copy = styled.div`
   position: absolute;
   bottom: 5%;
   left: 8%;
   color: white;
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+    margin-top: 10%;
+    bottom: 5%;
+    left: 8%;
+  }
 `;
 
 function Footer() {
   return (
     <Container>
-      <LogoTag src="Footer.png" alt="" />
+      <LogoTag
+        src="https://iconmage.s3.ap-northeast-2.amazonaws.com/Footer.png"
+        alt=""
+      />
       <AboutTag>
         About us<br></br>
         <a id="repo" href="https://github.com/codestates/underTheSea">

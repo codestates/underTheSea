@@ -1,14 +1,23 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Header from "../component/Header";
+import Header2 from "../component/Header2";
 import ManageCard from "./ManageCard";
+import { useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import AddContainer from "../modalComponent/AddContainer";
+import Footer from "../component/Footer";
 
-const TitleContainer = styled.div`
+const TitleContainer = styled.img`
   position: relative;
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: 40vh;
+  height: 65vh;
+  @media screen and (max-width: 768px) {
+    height: 45vh;
+  }
 `;
 
 const Title = styled.div`
@@ -38,37 +47,42 @@ const Img = styled.img`
   height: 43%;
 `;
 
-const OuterContainer = styled.div`
-  border: 1px solid black;
-  width: 100%;
-  height: 170%;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
 //주간 피딩 14번 , 주간 환수 1번
-function Manage({ getAllConInfo, getConInfo }) {
+function Manage({ getAllConInfo, handleCondata }) {
+  const [containerList, setContainerList] = useState([]);
+  const accessToken = localStorage.getItem("accessToken");
+  const state = useSelector((state) => state.modalReducer);
+  const { isAddContainerModal } = state;
+
   useEffect(() => {
-    console.log("관리페이지 왜 안뜨는데");
-    getAllConInfo();
+    window.scroll(0, 0);
+    axios
+      .get(`${process.env.REACT_APP_SERVER_API}/container/all`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((res) => {
+        // console.log(res.data);
+        setContainerList([...res.data.data]);
+      });
   }, []);
-  const con_list = JSON.parse(localStorage.getItem("allConInfo"));
-  // console.log("con_list FROM MANAGE:", con_list.data.data);
-  // console.log("con_list2 FROM MANAGE:", containerList);
-  // console.log("aquaInfo FROM MANAGE:", aquaInfo);
   return (
     <>
-      <Header />
-      <TitleContainer>
-        <Title>My Aquarium</Title>
-        <Text>당신의 어항을 관리해보세요!</Text>
-        <Img src="작은해초.png" alt="" />
+      <Header2 />
+      <TitleContainer src="/관리배너.jpg">
+        {/* <Title>My Aquarium</Title> */}
+        {/* <Text>당신의 어항을 관리해보세요!</Text> */}
       </TitleContainer>
       {/* <ManageCard /> */}
-      {/* <ManageCard containerList={con_list.data.data} /> */}
-      {/* <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} /> */}
-      <ManageCard containerList={con_list} getConInfo={getConInfo} />
+      {/* <ManageCard containerList={con_list.data.data} />
+      <ManageCard containerList={con_list.data.data} getConInfo={getConInfo} /> */}
+      <ManageCard
+        containerList={containerList}
+        isAddContainerModal={isAddContainerModal}
+        handleCondata={handleCondata}
+      />
+      {isAddContainerModal && <AddContainer />}
+      <Footer />
     </>
   );
 }

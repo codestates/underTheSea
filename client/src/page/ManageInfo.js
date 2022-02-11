@@ -1,106 +1,188 @@
 import styled from "styled-components";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const Container = styled.div`
-  /* position: relative; */
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* top: 15%; */
-  width: 25%;
-  height: 390px;
-  box-shadow: 5px 8px 7px 3px #c6c6c6;
-  margin: 1%;
-  /* background: #d1f8ff; */
+  position: relative;
+  margin: 2% 3% 5%;
+  width: 270px;
+  height: 375px;
+  box-shadow: 0px 0px 20px #adb5bd;
   border-radius: 20px;
-  /* border: 1px solid black; */
+  transition: all 0.3s;
+  :hover {
+    transform: matrix(1, 0, 0, 1, 0, -10);
+    box-shadow: 0px 0px 30px #adb5bd;
+    transition: all 0.3s;
+  }
+  @media screen and (max-width: 1200px) {
+    margin-bottom: 5%;
+  }
 `;
 
 const Contents = styled.div`
-  /* position: relative; */
   width: 100%;
   height: 100%;
-  /* border: 1px solid green; */
   text-align: left;
 `;
 
 const ImgContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 50%;
+  height: 53%;
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  /* border: 1px solid black; */
 `;
 const Img = styled.img`
-  width: 100%;
-  height: 100%;
-  /* opacity: 0.8; */
+  width: 102%;
+  height: 115%;
+  position: relative;
+  top: 2%;
 `;
 const Content = styled.div`
+  /* border: 1px solid red; */
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  justify-content: space-evenly;
   width: 100%;
-  height: 50%;
-  padding: 10px;
+  height: 45%;
   box-sizing: border-box;
-  /* margin-top: 2%; */
-  line-height: 200%;
-  margin: auto;
-  /* border: 1px solid black; */
+  /* line-height: 250%; */
+  .delete {
+    position: absolute;
+    width: 20%;
+    height: 5%;
+    top: 5%;
+    right: 5%;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-family: "Kfont";
+    :hover {
+      cursor: pointer;
+      color: #108dee;
+    }
+  }
+`;
+
+const DeleteBtn = styled.div`
+  position: absolute;
+  top: 2%;
+  right: 5%;
+  :hover {
+    cursor: pointer;
+    color: #108dee;
+  }
+`;
+
+const ContainerInfoBox = styled.div`
+  width: 90%;
+  height: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const Name = styled.div`
-  /* position: absolute; */
-  /* left: 5%; */
+  width: 90%;
   border-radius: 5px;
-  background: #e5e5e5;
   text-align: center;
   font-family: "Kfont";
   font-weight: bold;
   font-size: 1.3rem;
-  /* border: 1px solid red; */
+`;
+
+const TextCover = styled.div`
+  width: 90%;
+  display: flex;
+  border-radius: 5px;
+`;
+
+const Text = styled.div`
+  display: flex;
+  justify-content: center;
+  font-family: "Kfont";
+  width: 40%;
+  font-weight: 600;
+  font-size: 1.1rem;
+  @media screen and (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const Size = styled.div`
-  /* position: absolute; */
-  /* left: 5%; */
-  /* top: 33%; */
+  display: flex;
+  width: 57%;
+  justify-content: center;
   font-family: "Kfont";
-  line-height: 170%;
-  font-weight: 450;
-  font-size: 1.25rem;
-  /* border: 1px solid red; */
+  font-weight: 600;
+  border-radius: 5px;
+  background: #e1e1e1;
+  @media screen and (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const Theme = styled.div`
-  /* position: absolute; */
-  /* left: 5%; */
-  /* top: 33%; */
+  display: flex;
+  width: 57%;
+  justify-content: center;
   font-family: "Kfont";
-  line-height: 170%;
-  font-weight: 450;
-  font-size: 1.25rem;
-  /* border: 1px solid red; */
+  font-weight: 600;
+  border-radius: 5px;
+  padding-bottom: 1%;
+  background: #e1e1e1;
+  @media screen and (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
-function ManageInfo({ id, name, size, theme, level, getConInfo }) {
+function ManageInfo({ id, name, size, theme, level, handleCondata }) {
   const navigate = useNavigate();
-  console.log(name, level);
   const month = new Date().getMonth() + 1;
+  const accessToken = localStorage.getItem("accessToken");
+  const DeleteHandler = () => {
+    axios
+      .delete(`${process.env.REACT_APP_SERVER_API}/container/${id}`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((result) => {
+        navigate("/manage");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const sendCardInfo = async () => {
-    let newData = await getConInfo(id);
-    console.log("ID and NEW CONINFO:", id, newData);
+    const response = await axios.get(
+      `${process.env.REACT_APP_SERVER_API}/container/${id}/${month}`,
+      {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      }
+    );
+    handleCondata(response.data.data);
+    localStorage.setItem("conInfo", JSON.stringify(response.data.data));
     navigate(`${id}`);
   };
-  const imgSrcUrl = "http://localhost:80/level/" + level;
+  const imgSrcUrl = `${process.env.REACT_APP_SERVER_API}/level/` + level;
   return (
     // 컨테이너를 누르면 매니지 디테일페이지로 정보가 넘어가야되요
     // 컨테이너 올을하면 수조 목록이 다뜨는데 환수정보랑 피딩정보가 없음
@@ -109,15 +191,26 @@ function ManageInfo({ id, name, size, theme, level, getConInfo }) {
       <Contents>
         <ImgContainer>
           <Img src={imgSrcUrl}></Img>
-          {/* <Img src="/관리어항.png"></Img> */}
         </ImgContainer>
         <Content>
-          <Name>{name}</Name>
-          {/* <Name>이름</Name> */}
-          <Size>사이즈: {size}L</Size>
-          {/* <Size>사이즈: 200L</Size> */}
-          <Theme>테마: {theme}</Theme>
-          {/* <Theme>테마: 산호</Theme> */}
+          <ContainerInfoBox>
+            <Name>{name}</Name>
+
+            <TextCover>
+              <Text>어항 크기 :</Text>
+              <Size>{size}L</Size>
+            </TextCover>
+            <TextCover>
+              <Text>수조 테마 :</Text>
+              <Theme>{theme}</Theme>
+            </TextCover>
+          </ContainerInfoBox>
+          <DeleteBtn onClick={DeleteHandler}>
+            <FontAwesomeIcon icon={faTimes} size="1x" />
+          </DeleteBtn>
+          {/* <button className="delete" onClick={DeleteHandler}>
+            삭제
+          </button> */}
         </Content>
       </Contents>
     </Container>

@@ -18,7 +18,7 @@ const DarkBackGround = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  width: 70%;
+  width: 60%;
   height: 80%;
   background: white;
   border-radius: 20px;
@@ -27,7 +27,7 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  z-index: 9999;
   .btn {
     width: 25px;
     height: 30px;
@@ -37,6 +37,9 @@ const ModalContainer = styled.div`
     :hover {
       cursor: pointer;
     }
+  }
+  @media screen and (max-width: 750px) {
+    width: 90%;
   }
 `;
 const ContentContainer = styled.div`
@@ -74,15 +77,27 @@ const SubTitle = styled.div`
 const Wave = styled.img`
   width: 70%;
   margin: 10px 0px;
+  @media screen and (max-width: 750px) {
+    width: 95%;
+    margin: auto;
+  }
 `;
 
 const AquaBox = styled.img`
   width: 70%;
   margin: 20px 0px;
+  @media screen and (max-width: 750px) {
+    width: 95%;
+    margin: auto;
+  }
 `;
 const Rock = styled.img`
   width: 80%;
   margin: 20px 0px;
+  @media screen and (max-width: 750px) {
+    width: 95%;
+    margin: auto;
+  }
 `;
 
 function SuppliesInfo() {
@@ -96,6 +111,7 @@ function SuppliesInfo() {
             <FontAwesomeIcon
               icon={faTimes}
               size="2x"
+              color="#e5e5e5"
               onClick={() => dispatch(modalOff)}
             />
           </div>
@@ -111,7 +127,10 @@ function SuppliesInfo() {
             물고기의 종류와 마릿수도 많아지기 때문에 가능한 큰 크기의 수조를
             준비하는 것이 좋습니다.
             <br />
-            <AquaBox src="수조형태.png" alt="수조형태" />
+            <AquaBox
+              src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EC%88%98%EC%A1%B0%ED%98%95%ED%83%9C.png"
+              alt="수조형태"
+            />
             <br />
             수조를 선택하기에 앞서 다양한 여과장치들이 들어가는 섬프수조의
             위치에 따라 사진 왹쪽같은 하단섬프형태와
@@ -138,9 +157,15 @@ function SuppliesInfo() {
             있지만 원치 않았던 털게, 맨티스 등의 히치하이커들이 있을 수도 있으며
             수조에 유해한 무척추 생물들이 같이 살 수도 <br />
             있기 때문에 데드락을 사용할 수도 있습니다.
-            <Rock src="락세팅사진.jpeg" />
+            <Rock
+              src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%9D%BD%EC%84%B8%ED%8C%85%EC%82%AC%EC%A7%84.jpeg"
+              alt="락세팅사진.jpeg"
+            />
             <SubTitle>4. 수류모터</SubTitle>
-            <Wave src="수류모터.png" />
+            <Wave
+              src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EC%88%98%EB%A5%98%EB%AA%A8%ED%84%B0.png"
+              alt="수류모터.png"
+            />
             <br />
             자연의 바다에도 해류가 흐르는 것이 자연스럽듯 우리들의 바다에도
             흐름이 필요합니다. 수조 환경에서는

@@ -4,9 +4,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const path = require("path");
-// const { authToken } = require("./middleware/token");
+const http = require("http");
 const db = require("./db/connection");
-// const controllers = require("./controllers");
 const indexRouter = require("./routes");
 
 const port = 80;
@@ -21,11 +20,19 @@ const upload = multer({ dest: "uploads/" });
 const { uploadFile, getFileStream } = require("./s3");
 //const fs = require("fs");
 const app = express();
+const httpServer = http.createServer(app);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: true,
+    origin: [
+      "http://localhost:3000",
+      "https://dhlgdv3s1nzv4.cloudfront.net/",
+      "https://yesjin.link",
+      "http://ec2-52-79-221-13.ap-northeast-2.compute.amazonaws.com",
+      "https://underthesea.ga",
+      "https://www.underthesea.ga",
+    ],
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "PATCH", "DELETE"],
   })
@@ -35,6 +42,7 @@ app.use(cookieParser());
 app.get("/", function (req, res) {
   res.status(200).send("hello world!!!!!!!!!!!");
 });
+
 app.get("/status", (req, res) => {
   db.query("use uts", (err) => {
     if (err) {
@@ -50,6 +58,9 @@ app.get("/images/:key", (req, res) => {
   const readStream = getFileStream(key);
   // console.log(readStream);
   readStream.pipe(res);
+});
+app.get("/addfishinfo", (req, res) => {
+  res.sendFile(path.join(__dirname, "./views/addfishinfo.html"));
 });
 
 app.post("/images", upload.single("image"), async (req, res) => {
@@ -67,9 +78,8 @@ app.get("/level/:level_id", (req, res) => {
 });
 app.use("/", indexRouter);
 
-let server;
-server = app.listen(port, () => {
+httpServer.listen(port, () => {
   console.log(`      🚀 Server is starting on ${port}`);
 });
 
-module.exports = server;
+module.exports = httpServer;

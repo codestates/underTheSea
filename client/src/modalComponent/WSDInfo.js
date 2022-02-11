@@ -27,7 +27,6 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   .btn {
     width: 25px;
     height: 30px;
@@ -37,6 +36,9 @@ const ModalContainer = styled.div`
     :hover {
       cursor: pointer;
     }
+  }
+  @media screen and (max-width: 750px) {
+    width: 90%;
   }
 `;
 const ContentContainer = styled.div`
@@ -82,6 +84,9 @@ const ImgContainer = styled.div`
   .noMargin {
     margin: 0px;
   }
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 const ImgContainer2 = styled.div`
   display: flex;
@@ -98,12 +103,21 @@ const ImgContainer2 = styled.div`
 const Skimmer = styled.img`
   width: 20%;
   height: 80%;
+  @media screen and (max-width: 750px) {
+    width: 50%;
+  }
 `;
 const DryContainer = styled.div`
   display: flex;
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 const Dry = styled.img`
   width: 40%;
+  @media screen and (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
 function WSDInfo() {
@@ -117,6 +131,7 @@ function WSDInfo() {
             <FontAwesomeIcon
               icon={faTimes}
               size="2x"
+              color="#e5e5e5"
               onClick={() => dispatch(modalOff)}
             />
           </div>
@@ -130,7 +145,10 @@ function WSDInfo() {
           </p>
           <h2 className="structure">백점병의 원인</h2>
           <ImgContainer>
-            <Skimmer src="백점병원균.png" />
+            <Skimmer
+              src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%B0%B1%EC%A0%90%EB%B3%91%EC%9B%90%EA%B7%A0.png"
+              alt="백점병원균.png"
+            />
             <p>
               <i>Cryptocaryon irritans</i> 라는 기생충에 의해 발병합니다. <br />
               백점충이 해수어에 기생하기 시작하면 피부와 아가미 속으로
@@ -141,7 +159,10 @@ function WSDInfo() {
           <h2 className="structure">백점충의 생활사</h2>
           <ImgContainer2>
             <DryContainer>
-              <Dry src="백점충생활사.png" />
+              <Dry
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%B0%B1%EC%A0%90%EC%B6%A9%EC%83%9D%ED%99%9C%EC%82%AC.png"
+                alt="백점충생활사.png"
+              />
               <p className="noMargin">
                 백점충의 생활사는 28일 이상을 지속할 수 있으며 3단계로 나눌 수
                 <br />

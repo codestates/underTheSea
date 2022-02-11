@@ -6,38 +6,65 @@ import Mypage from "./page/Mypage";
 import ManageDetail from "./Manage2Component/ManagaDetail";
 import ManageAddInfo from "./page/ManageAddInfo";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SeaWaterGuide from "./page/SeaWaterGuide";
+import FreshWaterGuide from "./page/FreshWaterGuide";
 import HoneyTips from "./Tips_component/HoneyTips";
 import WriteTips from "./Tips_component/WriteTips";
 import PostTips from "./Tips_component/PostTips";
 import Login from "./modalComponent/Login";
+import Logout from "./modalComponent/Logout";
 import SignUp from "./modalComponent/SignUp";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { loginAction, loginModalOnAction } from "./store/actions";
 
 function App() {
   const state = useSelector((state) => state.modalReducer);
   const loginState = useSelector((state) => state.authReducer);
   const conData = useSelector((state) => state.conInfoReducer);
-  const { isLoginModal, isSignupModal } = state;
+  const dispatch = useDispatch();
+  const { isLoginModal, isSignupModal, isLogoutModal } = state;
   const { isLogin } = loginState;
-
-  const [tt, setTt] = useState("T.T");
 
   const month = new Date().getMonth() + 1;
 
-  const getAllConInfo = async () => {
-    const response = await axios.get(`http://localhost:80/container/all`, {
-      headers: { authorization: `Bearer ${accessToken}` },
-      withCredentials: true,
-    });
-    // console.log("res from MANAGE", response);
-    localStorage.setItem("allConInfo", JSON.stringify(response));
+  // 구글 소셜 로그인
+  const url = new URL(window.location.href);
+  const authorizationCode = url.searchParams.get("code");
+  // 소셜로그인 토큰 받아오기
+  const getAccessToken = (authorizationCode) => {
+    axios
+      .post(`${process.env.REACT_APP_SERVER_API}/user/auth/google/callback`, {
+        authorizationCode,
+      })
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("accessToken", res.data.data.token);
+        dispatch(loginAction);
+      });
   };
+
+  // 로그인 상태 확인
+  const checkLogin = (accessToken) => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_API}/user/status`, {
+        headers: { authorization: `Bearer ${accessToken}` },
+        withCredentials: true,
+      })
+      .then((res) => {
+        const result = res.data.status;
+        if (result === 1) {
+          dispatch(loginAction);
+        } else if (result === 2) {
+          dispatch(loginModalOnAction);
+        }
+      });
+  };
+
   const getConInfo = async (id) => {
     const response = await axios.get(
-      `http://localhost:80/container/${id}/${month}`,
+      `${process.env.REACT_APP_SERVER_API}/container/${id}/${month}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -57,7 +84,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:80/container/all`, {
+      .get(`${process.env.REACT_APP_SERVER_API}/container/all`, {
         headers: { authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       })
@@ -66,7 +93,11 @@ function App() {
         setContainerList(res.data.data);
         // console.log("수조목록", containerList);
       });
-  }, [isLogin]);
+    if (authorizationCode) {
+      getAccessToken(authorizationCode);
+    }
+    checkLogin(accessToken);
+  }, []);
 
   const idList = containerList.map((container) => container.id);
 
@@ -78,6 +109,7 @@ function App() {
     size: "",
     theme: "",
   });
+  const [condata, setCondata] = useState({});
   const [size, setSize] = useState({
     width: 0,
     height: 0,
@@ -118,7 +150,7 @@ function App() {
     console.log("토큰!", token);
     axios
       .post(
-        `http://localhost:80/container/add`,
+        `${process.env.REACT_APP_SERVER_API}/container/add`,
         { data: aquaInfo },
         {
           headers: {
@@ -139,14 +171,13 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  // ------------------------------------------
-
   const [token, setToken] = useState("");
   const [selConId, setSelConId] = "";
   const handleSelConId = (selConId) => setSelConId(selConId);
   const handleToken = (token) => {
     setToken(token);
   };
+  const handleCondata = (e) => setCondata(e);
 
   return (
     <BrowserRouter>
@@ -154,25 +185,31 @@ function App() {
         <Route path="/" element={<Main />}></Route>
         <Route path="/guide" element={<Guide />}></Route>
         <Route path="/seawaterguide" element={<SeaWaterGuide />}></Route>
+        <Route path="/freshwaterguide" element={<FreshWaterGuide />}></Route>
         <Route path="/honeytips" element={<HoneyTips />}></Route>
         <Route path="/search" element={<Search />}></Route>
         <Route path="/writetips" element={<WriteTips token={token} />}></Route>
-        <Route path="/posttips" element={<PostTips />}></Route>
+        <Route path="/posttips/:tip_id" element={<PostTips />}></Route>
         <Route
           path="/manage"
           element={
             <Manage
               aquaInfo={aquaInfo}
               containerList={containerList}
-              getAllConInfo={getAllConInfo}
-              getConInfo={getConInfo}
+              handleCondata={handleCondata}
             />
           }
         ></Route>
         <Route
           path="/manage/:container_id"
           /* 넘겨받은 아이디 중에 디테일 선택했을 때 아이디만 보여줘야한다 */
-          element={<ManageDetail idList={idList} tt={tt} />}
+          element={
+            <ManageDetail
+              idList={idList}
+              condata={condata}
+              setCondata={setCondata}
+            />
+          }
         ></Route>
         <Route
           path="/manage/addInfo"
@@ -188,9 +225,9 @@ function App() {
         <Route path="/mypage" element={<Mypage />}></Route>
       </Routes>
       {isLoginModal && <Login handleToken={handleToken} />}
+      {isLogoutModal && <Logout />}
       {isSignupModal && <SignUp />}
     </BrowserRouter>
   );
 }
-
 export default App;

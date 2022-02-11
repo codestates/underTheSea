@@ -210,7 +210,7 @@ function ManageAddInfo({
   //   console.log(token);
   //   axios
   //     .post(
-  //       `http://localhost:80/container/add`,
+  //       `${process.env.REACT_APP_SERVER_API}/container/add`,
   //       { data: aquaInfo },
   //       {
   //         headers: {
@@ -284,7 +284,7 @@ function ManageAddInfo({
             </Box2>
           </Contents>
         </Form>
-        {/* <img src="http://localhost:80/level/11" /> */}
+        {/* <img src="${process.env.REACT_APP_SERVER_API}/level/11" /> */}
       </Container>
     </>
   );

@@ -38,6 +38,9 @@ const ModalContainer = styled.div`
       cursor: pointer;
     }
   }
+  @media screen and (max-width: 750px) {
+    width: 90%;
+  }
 `;
 const ContentContainer = styled.div`
   width: 95%;
@@ -79,6 +82,9 @@ const Wave = styled.img`
 const FilterMedia = styled.img`
   width: 70%;
   margin: 20px 0px;
+  @media screen and (max-width: 750px) {
+    width: 100%;
+  }
 `;
 const Rock = styled.img`
   width: 80%;
@@ -96,6 +102,7 @@ function FilterMediaInfo() {
             <FontAwesomeIcon
               icon={faTimes}
               size="2x"
+              color="#e5e5e5"
               onClick={() => dispatch(modalOff)}
             />
           </div>
@@ -111,7 +118,10 @@ function FilterMediaInfo() {
             것은 아닙니다. 라이브락이나 데드락의 작은 공간이나 바닥재의 입자
             사이사이 공간에도 서식할 수 있습니다.
             <br />
-            <FilterMedia src="여과재확대.png" alt="여과재" />
+            <FilterMedia
+              src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EC%97%AC%EA%B3%BC%EC%9E%AC%ED%99%95%EB%8C%80.png"
+              alt="여과재"
+            />
             <br />
             여과재는 한번 넣어두고 영구적으로 사용하기보다 주기적으로 세칙 및
             교환 등의 관리가 필요합니다. <br />

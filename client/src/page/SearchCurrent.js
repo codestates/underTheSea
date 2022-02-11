@@ -11,12 +11,17 @@ const Container = styled.div`
   width: 300px;
   height: 420px;
   border-radius: 20px;
-  box-shadow: 0px 0px 20px #adb5bd;
   margin-bottom: 7%;
-  /* background: #d1f8ff; */
   perspective: 1000px;
+
   #box:hover {
     transform: rotateY(-180deg);
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 85%;
+    height: 270px;
+    margin-bottom: 25%;
   }
 `;
 
@@ -30,8 +35,10 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
   transform-style: preserve-3d;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px #adb5bd;
   transform: rotateY(0deg);
-  transition: 1s;
+  transition: 1.5s;
   /* border: 1px solid black; */
 `;
 
@@ -49,9 +56,13 @@ const ImgContainer = styled.div`
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   overflow: hidden;
+
+  @media screen and (max-width: 480px) {
+    height: 65%;
+  }
 `;
 const Img = styled.img`
-  width: 100%;
+  width: 105%;
   height: 100%;
 `;
 const Content = styled.div`
@@ -65,17 +76,32 @@ const Content = styled.div`
   line-height: 200%;
   margin: 10% 0 0 5%;
   font-family: "Kfont";
-  /* box-sizing: border-box; */
-  /* border: 1px solid black; */
+
+  @media screen and (max-width: 480px) {
+    padding-left: 5%;
+  }
 `;
+
 const Name = styled.div`
   font-weight: bold;
   font-size: 1.5rem;
+
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+    width: 70%;
+    height: 17%;
+  }
 `;
+
 const Ename = styled.div`
   font-size: 1.2rem;
   color: #828282;
   font-style: italic;
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+    width: 70%;
+  }
 `;
 
 const Back = styled.div`
@@ -103,6 +129,7 @@ const Contents = styled.div`
   transform: translate(-50%, 0);
   margin-top: 5%;
 `;
+
 const NameB = styled.div`
   align-items: center;
   justify-content: center;
@@ -110,6 +137,10 @@ const NameB = styled.div`
   margin-bottom: 130%;
   font-weight: bold;
   font-size: 1.5rem;
+
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 const NamesB = styled.div`
@@ -121,25 +152,46 @@ const NamesB = styled.div`
   color: #828282;
   text-align: center;
   font-style: italic;
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+    width: 70%;
+  }
 `;
 const Text = styled.div`
   position: absolute;
   top: 20%;
   line-height: 170%;
   font-weight: bold;
+  @media screen and (max-width: 480px) {
+    top: 20%;
+    line-height: 100%;
+  }
 `;
 const Habitat = styled.div`
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+  }
   /* border: 1px solid red; */
 `;
 const Temp = styled.div`
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+  }
   /* border: 1px solid red; */
 `;
 const Size = styled.div`
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+  }
   /* border: 1px solid red; */
 `;
 
 const Desc = styled.div`
   margin-top: 8%;
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+  }
   /* border: 1px solid red; */
 `;
 const DescBottom = styled.div`
@@ -148,6 +200,10 @@ const DescBottom = styled.div`
   line-height: 180%;
   font-size: 0.9rem;
   text-align: justify;
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.5rem;
+  }
 `;
 function SearchCurrent({ item }) {
   return (
@@ -157,7 +213,10 @@ function SearchCurrent({ item }) {
       <Box id="box">
         <Front>
           <ImgContainer>
-            <Img src={"http://localhost:80" + item.fish_img} alt=""></Img>
+            <Img
+              src={process.env.REACT_APP_SERVER_API + item.fish_img}
+              alt=""
+            ></Img>
           </ImgContainer>
           <Content>
             <Name>{item.fish_name}</Name>

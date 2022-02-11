@@ -20,7 +20,7 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 20%;
-  height: 23%;
+  height: 30%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -28,6 +28,9 @@ const ModalContainer = styled.div`
   display: flex;
   border-radius: 20px;
   align-items: center;
+  @media screen and (max-width: 480px) {
+    width: 50%;
+  }
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
@@ -38,6 +41,14 @@ const CloseBtnContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
+`;
+
+const CloseBtn = styled.div`
+  cursor: pointer;
+  font-size: 2rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const ShowContainer = styled.div`
@@ -67,6 +78,9 @@ const Text = styled.div`
   font-family: "Kfont";
   font-weight: bold;
   font-size: 1.25rem;
+  @media screen and (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const Input = styled.input`
@@ -104,11 +118,15 @@ const Btn = styled.button`
 function Deadfish({ container_id }) {
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem("accessToken");
+  const [fishList, setFishList] = useState([]);
   const [fishDeadInfo, setFishDeadInfo] = useState({
     fish_name: "",
     fish_num: "",
   });
-
+  const conInfo = JSON.parse(localStorage.getItem("conInfo"));
+  const fish_list2 = conInfo.fish_list.map((el) => {
+    return el.fish_name;
+  });
   const handleInputValue = (e) => {
     setFishDeadInfo({
       ...fishDeadInfo,
@@ -118,14 +136,18 @@ function Deadfish({ container_id }) {
 
   const fishRemoveRequest = () => {
     axios
-      .delete(`http://localhost:80/container/${container_id}/fish`, {
-        data: fishDeadInfo,
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
-        withCredentials: true,
-      })
-      .then(() => {
+      .delete(
+        `${process.env.REACT_APP_SERVER_API}/container/${container_id}/fish`,
+        {
+          data: fishDeadInfo,
+          headers: {
+            authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        localStorage.setItem("conInfo", JSON.stringify(response.data.data));
         dispatch(modalOff);
       })
       .catch((err) => console.log(err));
@@ -135,12 +157,13 @@ function Deadfish({ container_id }) {
     <DarkBackGround>
       <ModalContainer>
         <CloseBtnContainer>
-          <FontAwesomeIcon
-            icon={faTimes}
-            size="2x"
-            onClick={() => dispatch(modalOff)}
-            color="#e5e5e5"
-          />
+          <CloseBtn>
+            <FontAwesomeIcon
+              icon={faTimes}
+              onClick={() => dispatch(modalOff)}
+              color="#e5e5e5"
+            />
+          </CloseBtn>
         </CloseBtnContainer>
         <ShowContainer>
           <Form>
@@ -150,7 +173,19 @@ function Deadfish({ container_id }) {
               type="text"
               name="fish_name"
               onChange={handleInputValue}
+              list="fishName"
+              autocomplete="off"
             />
+            <datalist id="fishName">
+              {fish_list2.map((el, idx) => (
+                <option
+                  className="fish-option"
+                  value={el}
+                  label={el}
+                  key={idx}
+                ></option>
+              ))}
+            </datalist>
             <Input
               placeholder="마릿수를 입력해주세요"
               type="number"

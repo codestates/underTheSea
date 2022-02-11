@@ -6,11 +6,11 @@ const Container = styled.div`
   border-radius: 20px;
   margin-bottom: 40px;
   box-shadow: 0px 0px 20px #adb5bd;
-  margin-right: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: all 0.3s;
+  /* margin-right: 35px; */
   :hover {
     transform: matrix(1, 0, 0, 1, 0, -10);
     box-shadow: 0px 0px 30px #adb5bd;

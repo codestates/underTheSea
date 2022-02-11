@@ -19,7 +19,9 @@ module.exports = async (req, res) => {
       await ex_waters.create({ container_id, amount });
       return res
         .header("Authorization", req.headers.authorization)
-        .redirect(`http://localhost:80/container/${container_id}/${month}`);
+        .redirect(
+          `${process.env.REACT_APP_API_URL}/container/${container_id}/${month}`
+        );
     }
   }
 };

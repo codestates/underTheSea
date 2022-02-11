@@ -10,8 +10,6 @@ module.exports = async (req, res) => {
     const check_container = await containers.findOne({
       where: { id: container_id },
     });
-    console.log(container_id);
-    console.log(check_container.dataValues);
 
     if (!check_container) {
       return res.status(404).json({

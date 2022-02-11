@@ -8,14 +8,11 @@ import styled from "styled-components";
 const ContainerS = styled.div`
   display: flex;
   align-items: center;
-  /* background-color: rgba(51, 153, 255, 0.1); */
-  border-top: 2px solid #108dee;
-  border-bottom: 2px solid #108dee;
-  /* border-radius: 10px; */
+  box-shadow: 0px 0px 10px #adb5bd;
+  border-radius: 10px;
   width: 100%;
   height: 20vh;
   margin-bottom: 7%;
-  /* border: 1px solid red; */
 `;
 
 const DetailImg = styled.div`
@@ -25,7 +22,6 @@ const DetailImg = styled.div`
   height: 100%;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  /* border-radius: 10px; */
   cursor: pointer;
 `;
 
@@ -33,17 +29,12 @@ const ImgD = styled.img`
   position: relative;
   width: 100%;
   height: 100%;
-  /* border-top-left-radius: 10px; */
-  /* border-bottom-left-radius: 10px; */
 `;
 
 const Content = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   width: 75%;
   height: 20vh;
-  /* text-align: left; */
-  /* line-height: 200%; */
 `;
 
 const LeftInfo = styled.div`
@@ -55,7 +46,6 @@ const LeftInfo = styled.div`
   align-items: center;
   width: 40%;
   height: 100%;
-  /* border: 1px solid darkgrey; */
 `;
 
 const RightInfo = styled.div`
@@ -65,94 +55,74 @@ const RightInfo = styled.div`
   align-items: center;
   width: 60%;
   height: 100%;
-  /* border: 1px solid darkgrey; */
 `;
 
 const FishDesc = styled.div`
   box-sizing: border-box;
   padding-left: 15px;
+  padding-right: 10px;
   width: 100%;
   height: 90%;
-  color: #108dee;
   font-size: 1rem;
   line-height: 140%;
-  border-left: 1.5px solid #108dee;
+  border-left: 1.5px solid #e5e5e5;
 `;
 
 const Name = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border-radius: 5px; */
-  /* border-bottom: 2px solid #108dee; */
-  /* background-color: rgba(51, 153, 255, 0.1); */
-  color: #108dee;
-  /* background: #108dee; */
-  /* color: white; */
   width: 80%;
   height: 20%;
   font-weight: bold;
   font-size: 1.2rem;
   font-family: "Kfont";
-  /* border: 2px solid #108dee; */
-  /* border: 1px solid red; */
 `;
 
 const HabitatContainer = styled.div`
   border-radius: 5px;
-  /* background-color: rgba(51, 153, 255, 0.1); */
-  /* background: #108dee; */
   overflow: hidden;
   display: flex;
   width: 100%;
   height: 100%;
-  /* border: 2px solid #108dee; */
 `;
 const MidContainer = styled.div`
   display: flex;
   width: 80%;
   height: 20%;
-  /* border: 1px solid red; */
 `;
 
 const Habitat = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #108dee;
   font-weight: bold;
   font-family: "Kfont";
-  /* border: 1px solid red; */
   width: 50%;
   height: 100%;
 `;
 
 const HabitatShow = styled.div`
-  /* background: white; */
-  color: #108dee;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: "Kfont";
-  /* border-top-right-radius: 4px; */
-  /* border-bottom-right-radius: 4px; */
   width: 50%;
   height: 100%;
 `;
 
-const TextD = styled.div`
-  line-height: 130%;
-  font-weight: 450;
-`;
-
-function ManageDetInfo({ conInfo }) {
+function ManageDetInfo() {
+  let conInfo = JSON.parse(localStorage.getItem("conInfo"));
   return (
     <>
       {conInfo.fish_list.map((el, idx) => {
         return (
           <ContainerS key={idx}>
             <DetailImg>
-              <ImgD src={el.fish_img} alt="" />
+              <ImgD
+                src={`${process.env.REACT_APP_SERVER_API}${el.fish_img}`}
+                alt="이미지"
+              />
             </DetailImg>
             {/* ----------------------------------------- */}
             <Content>

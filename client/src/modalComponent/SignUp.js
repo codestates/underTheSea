@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { modalOff } from "../store/actions";
+
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { signupAction } from "../store/actions";
+import { signupAction, modalOff } from "../store/actions";
 // import signupReducer from "../store/reducers/signupReducer";
 
 const DarkBackGround = styled.div`
@@ -23,7 +23,7 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 25%;
-  height: 60%;
+  height: 50%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -31,6 +31,7 @@ const ModalContainer = styled.div`
   display: flex;
   border-radius: 20px;
   align-items: center;
+  /* z-index: 9999; */
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
@@ -56,6 +57,7 @@ const Form = styled.form`
   width: 80%;
   height: 60%;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   /* border: 1px solid red; */
 `;
@@ -136,7 +138,7 @@ const Warning = styled.div`
 const SignupBtn = styled.button`
   width: 100%;
   height: 50px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   background: #108dee;
   border-style: none;
   padding: 10px;
@@ -213,7 +215,7 @@ function SignUp() {
     } else {
       setErrorMsg("");
       axios
-        .post(`http://localhost:80/user/signup`, {
+        .post(`${process.env.REACT_APP_SERVER_API}/user/signup`, {
           data: {
             email,
             user_name,
@@ -222,6 +224,7 @@ function SignUp() {
         })
         .then(() => {
           dispatch(signupAction);
+          dispatch(modalOff);
           navigate("/mypage");
         })
         .catch((res) => {
@@ -239,74 +242,68 @@ function SignUp() {
           <FontAwesomeIcon
             icon={faTimes}
             size="2x"
+            color="#e5e5e5"
             onClick={() => dispatch(modalOff)}
           />
         </CloseBtnContainer>
         <Title>회원가입</Title>
-        {signup ? (
-          <SignupSuccess>
-            <SignupSuccessText>회원가입에 성공했습니다!</SignupSuccessText>
-            <CloseBtn onClick={() => dispatch(modalOff)}>닫기</CloseBtn>
-          </SignupSuccess>
-        ) : (
-          <Form>
-            <Username
-              placeholder="이름을 입력해주세요"
-              type="text"
-              name="user_name"
-              required
-              autoComplete="on"
-              onChange={handleInputValue}
-            />
-            {checkUsername(userData.user_name) || !userData.user_name ? (
-              <Warning></Warning>
-            ) : (
-              <Warning>영문 또는 한글 숫자만 사용 가능합니다.</Warning>
-            )}
-            <Email
-              placeholder="이메일을 입력해주세요"
-              type="email"
-              name="email"
-              required
-              autoComplete="on"
-              onChange={handleInputValue}
-            />
-            {checkEmail(userData.email) || !userData.email ? (
-              <Warning></Warning>
-            ) : (
-              <Warning>알맞은 이메일 형식이 아닙니다.</Warning>
-            )}
-            <Pwd
-              placeholder="비밀번호를 입력해주세요"
-              type="password"
-              name="user_pwd"
-              autoComplete="on"
-              onChange={handleInputValue}
-            />
-            {checkPassword(userData.user_pwd) || !userData.user_pwd ? (
-              <Warning />
-            ) : (
-              <Warning>비밀번호는 8자이상 영문과 숫자 조합입니다.</Warning>
-            )}
-            <PwdChk
-              placeholder="비밀번호를 확인해주세요"
-              type="password"
-              name="pwd_chk"
-              required
-              autoComplete="on"
-              onChange={handleInputValue}
-            />
-            {onChangePasswordChk() || !userData.pwd_chk ? (
-              <Warning></Warning>
-            ) : (
-              <Warning>비밀번호가 일치하지 않습니다.</Warning>
-            )}
-            <SignupBtn type="button" onClick={handleSignup}>
-              회원가입
-            </SignupBtn>
-            <Warning>{errorMsg}</Warning>
-          </Form>
-        )}
+        <Form>
+          <Username
+            placeholder="이름을 입력해주세요"
+            type="text"
+            name="user_name"
+            required
+            autoComplete="on"
+            onChange={handleInputValue}
+          />
+          {checkUsername(userData.user_name) || !userData.user_name ? (
+            <Warning></Warning>
+          ) : (
+            <Warning>영문 또는 한글 숫자만 사용 가능합니다.</Warning>
+          )}
+          <Email
+            placeholder="이메일을 입력해주세요"
+            type="email"
+            name="email"
+            required
+            autoComplete="on"
+            onChange={handleInputValue}
+          />
+          {checkEmail(userData.email) || !userData.email ? (
+            <Warning></Warning>
+          ) : (
+            <Warning>알맞은 이메일 형식이 아닙니다.</Warning>
+          )}
+          <Pwd
+            placeholder="비밀번호를 입력해주세요"
+            type="password"
+            name="user_pwd"
+            autoComplete="on"
+            onChange={handleInputValue}
+          />
+          {checkPassword(userData.user_pwd) || !userData.user_pwd ? (
+            <Warning />
+          ) : (
+            <Warning>비밀번호는 8자이상 영문과 숫자 조합입니다.</Warning>
+          )}
+          <PwdChk
+            placeholder="비밀번호를 확인해주세요"
+            type="password"
+            name="pwd_chk"
+            required
+            autoComplete="on"
+            onChange={handleInputValue}
+          />
+          {onChangePasswordChk() || !userData.pwd_chk ? (
+            <Warning></Warning>
+          ) : (
+            <Warning>비밀번호가 일치하지 않습니다.</Warning>
+          )}
+          <SignupBtn type="button" onClick={handleSignup}>
+            회원가입
+          </SignupBtn>
+          <Warning>{errorMsg}</Warning>
+        </Form>
       </ModalContainer>
     </DarkBackGround>
   );

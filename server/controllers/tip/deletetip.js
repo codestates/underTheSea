@@ -1,4 +1,4 @@
-const { tips } = require("../../models");
+const { tips, comments } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
   } else {
     const tip_id = req.params.tip_id;
 
+    await comments.destroy({ where: { tip_id } });
     await tips.destroy({ where: { id: tip_id } });
     return res
       .status(200)

@@ -38,6 +38,9 @@ const ModalContainer = styled.div`
       cursor: pointer;
     }
   }
+  @media screen and (max-width: 750px) {
+    width: 90%;
+  }
 `;
 const ContentContainer = styled.div`
   width: 95%;
@@ -79,6 +82,9 @@ const ImgContainer = styled.div`
       margin-bottom: 5px;
     }
   }
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 const ImgContainer2 = styled.div`
   display: flex;
@@ -94,18 +100,33 @@ const ImgContainer2 = styled.div`
 `;
 const Skimmer = styled.img`
   width: 30%;
+  @media screen and (max-width: 750px) {
+    width: 80%;
+  }
 `;
 const DryContainer = styled.div`
   display: flex;
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 const Dry = styled.img`
   width: 20%;
+  @media screen and (max-width: 750px) {
+    width: 80%;
+  }
 `;
 const WetContainer = styled.div`
   display: flex;
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 const Wet = styled.img`
   width: 20%;
+  @media screen and (max-width: 750px) {
+    width: 80%;
+  }
 `;
 function SkimmerInfo() {
   const dispatch = useDispatch();
@@ -118,6 +139,7 @@ function SkimmerInfo() {
             <FontAwesomeIcon
               icon={faTimes}
               size="2x"
+              color="#e5e5e5"
               onClick={() => dispatch(modalOff)}
             />
           </div>
@@ -136,7 +158,10 @@ function SkimmerInfo() {
           </p>
           <h2 className="structure">스키머의 구조</h2>
           <ImgContainer>
-            <Skimmer src="스키머그림.png" />
+            <Skimmer
+              src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EC%8A%A4%ED%82%A4%EB%A8%B8%EA%B7%B8%EB%A6%BC.png"
+              alt="스키머그림.png"
+            />
             <p>
               <div className="sub-title">1. 공기조절벨브</div>
               스키머로 들어가는 공기유입량과 배출되는 물의 양을 조절하여 <br />
@@ -153,7 +178,10 @@ function SkimmerInfo() {
           <h2 className="structure">스키머 사용의 방식</h2>
           <ImgContainer2>
             <DryContainer>
-              <Dry src="드라이스키밍.png" />
+              <Dry
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%93%9C%EB%9D%BC%EC%9D%B4%EC%8A%A4%ED%82%A4%EB%B0%8D.png"
+                alt="드라이스키밍.png"
+              />
               <p>
                 <div className="sub-title">드라이 스키밍</div>
                 미세버블의 수위를 낮게 조절하여 오물을 진하게 모으는 방법입니다.
@@ -164,7 +192,10 @@ function SkimmerInfo() {
               </p>
             </DryContainer>
             <WetContainer>
-              <Wet src="웻스키밍.png" />
+              <Wet
+                src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EC%9B%BB%EC%8A%A4%ED%82%A4%EB%B0%8D.png"
+                alt="웻스키밍.png"
+              />
               <p>
                 <div className="sub-title">웻 스키밍</div>
                 미세버블의 수위를 높게 조절하여 효율이 좋지만 컵이 빠르게

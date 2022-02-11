@@ -2,21 +2,22 @@ const { container_fishes, containers, fishes } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
-  console.log("req헤더-->", req.headers);
+  console.log("에드피쉬 들어옴?");
   const userInfo = isAuthorized(req);
   if (!userInfo) {
     return res.status(401).json({ message: "You are not authorized" });
   } else {
     const container_id = req.params.container_id;
     const { fish_num, fish_name } = req.body.data;
-    // console.log("check_fish", check_fish);
+    let now = new Date();
+    const month = now.getMonth() + 1;
+
     const check_container = await containers.findOne({
       where: { id: container_id },
     });
     const check_fish = await fishes.findOne({
       where: { fish_name },
     });
-    console.log("check_fish", check_fish);
 
     if (!check_container) {
       return res.status(404).json({ message: "The container doesn't exist" });
@@ -32,10 +33,15 @@ module.exports = async (req, res) => {
           fish_name,
           fish_num,
         });
-        return res.status(201).json({
-          data: { new_container_fish },
-          message: "The fish is successfully added",
-        });
+        return res
+          .header("Authorization", req.headers.authorization)
+          .redirect(
+            `${process.env.REACT_APP_API_URL}/container/info/${container_id}/${month}`
+          );
+        // return res.status(201).json({
+        //   data: { new_container_fish },
+        //   message: "The fish is successfully added",
+        // });
       } else {
         await container_fish.increment("fish_num", {
           by: Number(fish_num),
@@ -43,11 +49,16 @@ module.exports = async (req, res) => {
         container_fish = await container_fishes.findOne({
           where: { fish_name, container_id },
         });
+        return res
+          .header("Authorization", req.headers.authorization)
+          .redirect(
+            `${process.env.REACT_APP_API_URL}/container/info/${container_id}/${month}`
+          );
 
-        return res.status(201).json({
-          data: { container_fish },
-          message: "The fish is successfully added",
-        });
+        // return res.status(201).json({
+        //   data: { container_fish },
+        //   message: "The fish is successfully added",
+        // });
       }
     }
   }

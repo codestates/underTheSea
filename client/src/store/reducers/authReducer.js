@@ -16,7 +16,10 @@ const authReducer = (prevState = userInfoState, action) => {
       };
       break;
     case LOG_OUT:
-      state = { ...userInfoState };
+      state = {
+        ...userInfoState,
+        isLogin: false,
+      };
       break;
     case SIGN_OUT:
       state = { ...userInfoState };

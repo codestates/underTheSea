@@ -1,6 +1,7 @@
 const { isAuthorized } = require("../tokenFunction");
 
 module.exports = (req, res) => {
+  // console.log(req, "#########");
   const userinfo = isAuthorized(req);
 
   if (!userinfo) {

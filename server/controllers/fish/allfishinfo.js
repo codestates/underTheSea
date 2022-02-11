@@ -8,6 +8,9 @@ module.exports = async (req, res) => {
   } else {
     // const { id, fish_name, habitat, temp, desc, fish_img } = fish.dataValues;
     // const final = { fish_id: id, fish_name, habitat, temp, desc, fish_img };
+    let OBJt = new Date();
+    OBJt.setHours(OBJt.getHours() + 9);
+    console.log(OBJt);
 
     const fish_data = fish_list.map((el) => el.dataValues);
     // console.log("----------", fish_data);

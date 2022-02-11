@@ -2,13 +2,13 @@ const { tips, comments, users } = require("../../models");
 const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
+  const userinfo = isAuthorized(req);
   const tip_id = req.params.tip_id;
   const comment_data = await comments.findAll({ where: { tip_id } });
   let isWriter = false;
   let id, user_name;
 
-  if (req.headers.authorization) {
-    const userinfo = isAuthorized(req);
+  if (userinfo) {
     id = userinfo.id;
     user_name = userinfo.user_name;
   }

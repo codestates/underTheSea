@@ -9,7 +9,10 @@ export DATABASE_NAME=$(aws ssm get-parameters --region ap-northeast-2 --names DA
 export ACCESS_SECRET=$(aws ssm get-parameters --region ap-northeast-2 --names ACCESS_SECRET --query Parameters[0].Value | sed 's/"//g')
 export GOOGLE_CLIENT_ID=$(aws ssm get-parameters --region ap-northeast-2 --names GOOGLE_CLIENT_ID --query Parameters[0].Value | sed 's/"//g')
 export GOOGLE_SECRET_ID=$(aws ssm get-parameters --region ap-northeast-2 --names GOOGLE_SECRET_ID --query Parameters[0].Value | sed 's/"//g')
-
+export BUCKET_NAME=$(aws ssm get-parameters --region ap-northeast-2 --names BUCKET_NAME --query Parameters[0].Value | sed 's/"//g')
+export BUCKET_REGION=$(aws ssm get-parameters --region ap-northeast-2 --names BUCKET_REGION --query Parameters[0].Value | sed 's/"//g')
+export BUCKET_ACCESS_KEY=$(aws ssm get-parameters --region ap-northeast-2 --names BUCKET_ACCESS_KEY --query Parameters[0].Value | sed 's/"//g')
+export BUCKET_SECRET_KEY=$(aws ssm get-parameters --region ap-northeast-2 --names BUCKET_SECRET_KEY --query Parameters[0].Value | sed 's/"//g')
 
 sudo kill -9 $(sudo lsof -t -i:80)
 authbind --deep pm2 start index.js

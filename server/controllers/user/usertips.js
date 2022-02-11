@@ -3,7 +3,7 @@ const { isAuthorized } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
   const userinfo = isAuthorized(req);
-  const limit = 8;
+  const limit = 7;
   const page_num = Number(req.params.page_num);
   const offset = (page_num - 1) * limit;
 
@@ -12,11 +12,17 @@ module.exports = async (req, res) => {
   } else {
     const user_id = userinfo.id;
 
+    const tip = await tips.findAll({
+      where: { user_id },
+    });
+
+    const tip_length = tip.length;
+
     const tips_data = await tips.findAll({
       offset,
       limit,
       where: { user_id },
-      order: ["createAt", "DESC"],
+      order: [["createdAt", "DESC"]],
     });
 
     const user_tips = tips_data.map((el) => {
@@ -30,6 +36,7 @@ module.exports = async (req, res) => {
 
     return res.status(200).json({
       data: user_tips,
+      length: tip_length,
       message: "User's tip data  is successfully returned",
     });
   }

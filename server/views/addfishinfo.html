@@ -1,79 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="text/javascript" src = ""></script>
-    <style>
-      #show{
-        width: 20%;
-      },
-      #myform2{
-        display: flex;
-        align-items: center;
-      }
-    </style>
-    <link rel="stylesheet" href="addfishinfo.css">
-    <title>Add Fish Info</title>
-  </head>
-  <body>
-    <br><br><br>  
-    <form calss="form" id = "myForm" >
-      <input type="file" id= "imgFile" accept="image/*"></input><br><br>
-      <input type="submit" value="이미지등록" />
-    </form>
-      <img id = "show" src="" alt="">
-    <br><br><br>
 
-    
-    </form>
-    <form action="/admin/fish" method="POST" id = "myForm2">
-      <input type="text" name ="fish_name" placeholder="fish_name">  STRING</input><br><br>  
-      <input type="text" name ="habitat" placeholder="habitat">   STRING</input><br><br>  
-      <input type="text" name ="temp" placeholder="temp"></input>   STRING<br> <br> 
-      <input type="text" name ="desc" placeholder="desc"></input>   TEXT<br> <br> 
-      <input type="text" name ="fresh_water" placeholder="fresh_water">  BOOLEAN</input><br> <br> 
-      <input type="text" name ="reefsafe" placeholder="reefsafe">   BOOLEAN</input><br> <br> 
-      <input type="text" name ="size" placeholder="size">   STRING</input><br> <br> 
-      <input type="text" name ="sci_name" placeholder="sci_name">   STRING</input><br> <br> 
-      <input type="text" name ="fish_img" id = "fish_img"placeholder="fish_img">   DO NOT TOUCH</input><br> <br> 
-      <button>DB에 등록</button>
-    </form>
-    <br><br><br> 
-      
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="text/javascript" src=""></script>
+  <link rel="stylesheet" href="./addfishinfo.css">
 
-    <form class = "form" action="http://localhost:3000/" method="GET">
-      <button >메인으로</button>
-    <br><br><br>  
+  <title>Add Fish Info</title>
+</head>
 
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-    <script>
-      const myForm = document.getElementById("myForm");
-      const imgFile = document.getElementById("imgFile");
-      const myForm2 = document.getElementById("myForm2");
-      const fish_img = document.getElementById("fish_img");
-      const show = document.getElementById("show");
+<body>
+  <br><br><br>
+  <form calss="form" id="myForm">
+    <input type="file" id="imgFile" accept="image/*"></input><br><br>
+    <input type="submit" value="이미지등록" />
+  </form>
+  <img id="show" src="" alt="">
+  <br><br><br>
 
-      myForm.addEventListener("submit", async(e) =>{
-        e.preventDefault();
 
-        const url = "/images";
-        const image = imgFile.files[0];
-        const formData = new FormData(); 
-        formData.append("image", image);
-        
-        const result = await axios.post("/images", formData, { headers: { "Content-Type": "multipart/form-data" }});
-        fish_img.value=result.data.imagePath;
-        show.src = result.data.imagePath;
-        
-      });
-     
-    </script>
-    
-  </body>
+  </form>
+  <form action="/admin/fish" method="POST" id="myForm2">
+    <input type="text" name="fish_name" placeholder="fish_name"> STRING</input><br><br>
+    <input type="text" name="habitat" placeholder="habitat"> STRING</input><br><br>
+    <input type="text" name="temp" placeholder="temp"></input> STRING<br> <br>
+    <input type="text" name="desc" placeholder="desc"></input> TEXT<br> <br>
+    <input type="text" name="fresh_water" placeholder="fresh_water"> BOOLEAN</input><br> <br>
+    <input type="text" name="reefsafe" placeholder="reefsafe"> BOOLEAN</input><br> <br>
+    <input type="text" name="size" placeholder="size"> STRING</input><br> <br>
+    <input type="text" name="sci_name" placeholder="sci_name"> STRING</input><br> <br>
+    <input type="text" name="fish_img" id="fish_img" placeholder="fish_img"> DO NOT TOUCH</input><br> <br>
+    <button>DB에 등록</button>
+  </form>
+  <br><br><br>
+
+
+  <form class="form" action="http://localhost:3000/" method="GET">
+    <button>메인으로</button>
+  </form><br><br><br>
+
+  <button id="btn" onclick="audio.play();">Water Drop!!</button>
+
+  <script type="text/javascript">
+    const audio = new Audio();
+    audio.src = "../../client/public/waterdrop.mp3" 
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <script>
+    const myForm = document.getElementById("myForm");
+    const imgFile = document.getElementById("imgFile");
+    const myForm2 = document.getElementById("myForm2");
+    const fish_img = document.getElementById("fish_img");
+    const show = document.getElementById("show");
+
+    myForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const url = "/images";
+      const image = imgFile.files[0];
+      const formData = new FormData();
+      formData.append("image", image);
+
+      const result = await axios.post("/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
+      fish_img.value = result.data.imagePath;
+      show.src = result.data.imagePath;
+
+    });
+
+
+  </script>
+
+</body>
+
 </html>
-
-
-

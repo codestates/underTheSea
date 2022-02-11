@@ -34,11 +34,15 @@ const ModalContainer = styled.div`
   animation-duration: 0.25s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-  z-index: 999;
+
   border-radius: 20px;
+
+  @media screen and (max-width: 480px) {
+    width: 70%;
+    height: 50%;
+  }
 `;
 const CloseBtnContainer = styled.div`
-  z-index: 999;
   position: absolute;
   right: 3%;
   top: 0%;
@@ -51,12 +55,14 @@ const CloseBtnContainer = styled.div`
 `;
 
 const Form = styled.form`
-  z-index: 999;
   width: 80%;
   height: 60%;
   display: flex;
   flex-direction: column;
   position: relative;
+  @media screen and (max-width: 480px) {
+    align-items: center;
+  }
 `;
 
 const TextForm = styled.div`
@@ -64,6 +70,9 @@ const TextForm = styled.div`
   display: flex;
   text-align: center;
   top: 22%;
+  @media screen and (max-width: 480px) {
+    justify-content: center;
+  }
 `;
 const Text = styled.div`
   position: relative;
@@ -71,6 +80,11 @@ const Text = styled.div`
   font-family: "Kfont";
   font-size: 1.2rem;
   font-weight: 600;
+  @media screen and (max-width: 480px) {
+    top: -20%;
+    width: 80%;
+    font-size: 0.9rem;
+  }
 `;
 const Btn = styled.div`
   display: flex;
@@ -80,9 +94,16 @@ const Btn = styled.div`
   position: absolute;
   top: 80%;
   justify-content: space-between;
+  @media screen and (max-width: 480px) {
+    top: 75%;
+    height: 45%;
+    width: 80%;
+    flex-direction: column;
+    /* border: 1px solid black; */
+    align-items: center;
+  }
 `;
 const CancleBtn = styled.button`
-  z-index: 999;
   width: 45%;
   height: 90%;
   background: #e1e1e1;
@@ -102,9 +123,14 @@ const CancleBtn = styled.button`
     height: 100%;
     background: rgba(0, 0, 0, 0.07);
   }
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+    width: 100%;
+    margin-bottom: 5%;
+  }
 `;
 const SignOutBtn = styled.button`
-  z-index: 999;
   width: 45%;
   height: 90%;
   background: #0474e8;
@@ -124,18 +150,25 @@ const SignOutBtn = styled.button`
     height: 100%;
     background: rgba(0, 0, 0, 0.1);
   }
+  @media screen and (max-width: 480px) {
+    font-size: 0.7rem;
+    width: 100%;
+  }
 `;
 //=======================================================================
 
-function SignOut({ accessToken }) {
+function SignOut() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const accessToken = localStorage.getItem("accessToken");
+
   function signOut() {
     axios
-      .delete("http://localhost:80/user", {
+      .delete(`${process.env.REACT_APP_SERVER_API}/user`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
-      .then(() => {
+      .then((result) => {
+        console.log(result, "!!!!!!!!");
         dispatch(signoutAction);
         navigate("/");
       });
@@ -148,6 +181,7 @@ function SignOut({ accessToken }) {
           <FontAwesomeIcon
             icon={faTimes}
             size="2x"
+            color="#e5e5e5"
             onClick={() => {
               dispatch(modalOff);
             }}

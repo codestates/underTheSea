@@ -1,7 +1,7 @@
 const { tips, users } = require("../../models");
 
 module.exports = async (req, res) => {
-  const limit = 10;
+  const limit = 12;
   const page_num = Number(req.params.page_num);
   // console.log(page_num);
   const offset = (page_num - 1) * limit;
@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
   const tip_num = tip.length;
   const tip_data = await tips.findAll({
     offset: offset,
-    limit: 10,
+    limit: 12,
     order: [["createdAt", "DESC"]],
   });
 

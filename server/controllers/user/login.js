@@ -3,7 +3,6 @@ const { generateAccessToken } = require("../tokenFunction");
 
 module.exports = async (req, res) => {
   const { email, user_pwd } = req.body.data;
-  console.log(email, user_pwd);
   if (!email || !user_pwd) {
     return res.status(400).json({ message: "Not enough data" });
   } else {

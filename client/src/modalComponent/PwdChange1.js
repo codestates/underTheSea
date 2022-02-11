@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { modalOff } from "../store/actions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// 1.7 송다영 1차 회원탈퇴 설정 (리덕스로 상태 관리 예정)
 
 const DarkBackGround = styled.div`
   z-index: 999;
@@ -38,7 +37,13 @@ const ModalContainer = styled.div`
   animation-fill-mode: forwards;
   z-index: 999;
   border-radius: 20px;
+
+  @media screen and (max-width: 480px) {
+    width: 80%;
+    height: 75%;
+  }
 `;
+
 const CloseBtnContainer = styled.button`
   z-index: 999;
   position: absolute;
@@ -114,6 +119,10 @@ const TextForm = styled.div`
   display: flex;
   text-align: center;
   top: 5%;
+
+  @media screen and (max-width: 480px) {
+    top: 0%;
+  }
 `;
 const Text = styled.div`
   position: relative;
@@ -124,50 +133,83 @@ const Text = styled.div`
 
 const NewPwd = styled.form`
   width: 100%;
-  height: 40%;
+  height: 70%;
   display: flex;
   flex-direction: column;
+  position: relative;
+  @media screen and (max-width: 480px) {
+    top: -5%;
+  }
 `;
 const CurPwd1 = styled.input`
-  margin-top: 23%;
+  margin-top: 9%;
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
   box-sizing: border-box;
-  margin-bottom: 15%;
+  margin-bottom: 10%;
+  z-index: 100;
+  @media screen and (max-width: 480px) {
+    position: relative;
+    top: -5%;
+  }
 `;
 const NewPwd1 = styled.input`
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
+  margin-bottom: 2%;
   box-sizing: border-box;
-  /* margin-bottom: 5%; */
+  z-index: 100;
+  @media screen and (max-width: 480px) {
+    position: relative;
+    top: -3%;
+  }
 `;
 const NewPwd2 = styled.input`
   width: calc(100%-10px);
   height: 30px;
   padding: 5px;
   box-sizing: border-box;
+  margin-bottom: 2%;
+  z-index: 100;
+  @media screen and (max-width: 480px) {
+    position: relative;
+    top: 0%;
+    margin-top: 4%;
+  }
 `;
 const Warning = styled.div`
   width: calc(100%-10px);
-  height: 20px;
+  height: 7%;
   font-size: 0.5rem;
-  /* margin-top: 10%; */
-  /* justify-content: flex-start; */
   color: red;
+  position: relative;
+  bottom: 14%;
+  padding-left: 2%;
 
-  padding: 2% 0 5% 2%;
+  @media screen and (max-width: 480px) {
+    /* border: 1px solid black; */
+    line-height: 120%;
+    height: 10%;
+    top: 0%;
+    padding-left: 2%;
+    margin: 0%;
+  }
 `;
 const Warning1 = styled.div`
   width: calc(100%-10px);
-  height: 20px;
+  height: 15%;
   font-size: 0.5rem;
-  /* margin-top: 10%; */
-  /* justify-content: flex-start; */
   color: red;
+  position: relative;
+  bottom: 80%;
+  padding-left: 2%;
 
-  padding: 2% 0 5% 2%;
+  @media screen and (max-width: 480px) {
+    border: 1px solid black;
+    bottom: 55%;
+  }
 `;
 
 const Btn = styled.div`
@@ -202,6 +244,13 @@ const ConfirmBtn = styled.button`
     height: 100%;
     background: rgba(0, 0, 0, 0.1);
   }
+
+  @media screen and (max-width: 480px) {
+    margin-top: 10%;
+    height: 60%;
+    font-size: 1rem;
+    padding: 0.2em 0 0.2em;
+  }
 `;
 //=======================================================================
 
@@ -227,7 +276,10 @@ function PwdChange({ handleOff }) {
     let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/; //대문자, 소문자, 숫자로 이루어진 10자 이하
     return regExp.test(new_pwd);
   };
-
+  const checkPassword2 = (new_pwd) => {
+    let regExp2 = /[a-zA-Z0-9]/;
+    return regExp2.test(new_pwd);
+  };
   //------------------------------------------------------------------------------------
 
   const handleInputValue = (key) => (e) => {
@@ -250,7 +302,7 @@ function PwdChange({ handleOff }) {
       } else {
         axios
           .patch(
-            `http://localhost:80/user/password`,
+            `${process.env.REACT_APP_SERVER_API}/user/password`,
             {
               data: { cur_pwd, new_pwd },
             },
@@ -303,6 +355,7 @@ function PwdChange({ handleOff }) {
             icon={faTimes}
             size="2x"
             type="button"
+            color="#e5e5e5"
             onClick={handleOff}
           />
         </CloseBtnContainer>
@@ -333,12 +386,14 @@ function PwdChange({ handleOff }) {
               {!currentPwd.new_pwd ? (
                 <Warning>
                   비밀번호는 8글자 이상, 영문, 숫자 조합이어야 합니다.
+                  {/* currentPwd.new_pwd.length >= 8  */}
                 </Warning>
-              ) : currentPwd.new_pwd.length >= 8 ||
-                checkPassword(currentPwd.new_pwd) ? (
+              ) : currentPwd.new_pwd.length >= 8 &&
+                checkPassword(currentPwd.new_pwd) &&
+                checkPassword2(currentPwd.new_pwd) ? (
                 <Warning>사용할 수 있는 비밀번호 입니다.</Warning>
               ) : (
-                <Warning></Warning>
+                <Warning>사용할 수 없는 비밀번호 입니다.</Warning>
               )}
               <NewPwd2
                 placeholder="새 비밀번호 확인"
@@ -348,7 +403,7 @@ function PwdChange({ handleOff }) {
                 onChange={handleInputValue("verifyPassword")}
               />
               {onChangePasswordChk() || !currentPwd.verifyPassword ? (
-                <Warning>비밀번호가 일치합니다.</Warning>
+                <Warning className="pwd-txt">비밀번호가 일치합니다.</Warning>
               ) : (
                 <Warning>비밀번호가 일치하지 않습니다.</Warning>
               )}

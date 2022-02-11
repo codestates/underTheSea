@@ -3,9 +3,7 @@ const Sequelize = require("sequelize");
 const op = Sequelize.Op;
 
 module.exports = async (req, res) => {
-  // console.log(req, "-------------");
   const fish_name = req.body.data.fish_name;
-  // console.log(fish_name);
   let fish_list = await fishes.findAll({
     where: { fish_name: { [op.like]: `%${fish_name}%` } },
   });

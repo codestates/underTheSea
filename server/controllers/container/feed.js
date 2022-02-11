@@ -17,10 +17,12 @@ module.exports = async (req, res) => {
       return res.status(404).json({ message: "The container doesn't exist" });
     } else {
       await feeds.create({ container_id, type });
-      console.log(type, "!@#$#%#$$TSGVDF%@$@#!@#");
+      console.log("Feed added and redirect!!!!!!!!!!!!!!!!!!!");
       return res
         .header("Authorization", req.headers.authorization)
-        .redirect(`http://localhost:80/container/${container_id}/${month}`);
+        .redirect(
+          `${process.env.REACT_APP_API_URL}/container/${container_id}/${month}`
+        );
     }
   }
 };

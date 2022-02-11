@@ -27,6 +27,10 @@ const ModalContainer = styled.div`
   display: flex;
   border-radius: 20px;
   align-items: center;
+  @media screen and (max-width: 768px) {
+    width: 50%;
+    height: 25%;
+  }
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
@@ -37,6 +41,14 @@ const CloseBtnContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
+`;
+
+const CloseBtn = styled.div`
+  cursor: pointer;
+  font-size: 2rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const ShowContainer = styled.div`
@@ -65,6 +77,9 @@ const Text = styled.div`
   font-family: "Kfont";
   font-weight: bold;
   font-size: 1.25rem;
+  @media screen and (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Input = styled.input`
@@ -99,19 +114,20 @@ const Btn = styled.button`
   }
 `;
 
-function ExChangeWaterInput({ handleExwaterValue, exwaterAddRequest }) {
+function ExChangeWaterInput({ handleExwaterValue, handleExwaterAddRequest }) {
   const dispatch = useDispatch();
 
   return (
     <DarkBackGround>
       <ModalContainer>
         <CloseBtnContainer>
-          <FontAwesomeIcon
-            icon={faTimes}
-            size="2x"
-            onClick={() => dispatch(modalOff)}
-            color="#e5e5e5"
-          />
+          <CloseBtn>
+            <FontAwesomeIcon
+              icon={faTimes}
+              onClick={() => dispatch(modalOff)}
+              color="#e5e5e5"
+            />
+          </CloseBtn>
         </CloseBtnContainer>
         <ShowContainer>
           <Form>
@@ -121,7 +137,7 @@ function ExChangeWaterInput({ handleExwaterValue, exwaterAddRequest }) {
               type="number"
               onChange={handleExwaterValue}
             />
-            <Btn type="button" onClick={exwaterAddRequest}>
+            <Btn type="button" onClick={handleExwaterAddRequest}>
               선택완료
             </Btn>
           </Form>

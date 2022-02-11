@@ -18,11 +18,12 @@ const DarkBackGround = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 `;
 
 const ModalContainer = styled.div`
   width: 25%;
-  height: 60%;
+  height: 55%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -30,14 +31,18 @@ const ModalContainer = styled.div`
   display: flex;
   border-radius: 20px;
   align-items: center;
-
   z-index: 999;
+
+  @media screen and (max-width: 480px) {
+    width: 70%;
+    height: 65%;
+    margin-right: 5%;
+  }
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
   top: 0px;
   width: 100%;
-
   padding: 10px;
   box-sizing: border-box;
   display: flex;
@@ -88,6 +93,7 @@ const LoginBtn = styled.button`
   font-size: 1.25rem;
   font-weight: bold;
   position: relative;
+
   :hover::before {
     content: "";
     position: absolute;
@@ -111,8 +117,9 @@ const GoogleBtn = styled.a`
   padding: 5px;
   font-size: 1.25rem;
   font-weight: bold;
-  position: relative;
   box-sizing: border-box;
+  position: relative;
+
   :hover::before {
     content: "";
     position: absolute;
@@ -124,7 +131,15 @@ const GoogleBtn = styled.a`
   }
 `;
 const GoogleIcon = styled.img`
+  z-index: 999;
   width: 30%;
+`;
+const Warning = styled.div`
+  width: 80%;
+  height: 30px;
+  margin-top: 40px;
+  color: red;
+  /* border: 1px solid red; */
 `;
 //=========================================================================
 
@@ -132,11 +147,11 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector((state) => state.authReducer);
-  const { isLogin } = state;
   const [userData, setUserData] = useState({
     email: "",
     user_pwd: "",
   });
+  const [errMsg, setErrMsg] = useState("");
 
   const handleInputValue = (e) => {
     setUserData({
@@ -149,8 +164,15 @@ function Login() {
 
     if (email && user_pwd) {
       axios
-        .post(`http://localhost:80/user/login`, { data: userData })
+        .post(`${process.env.REACT_APP_SERVER_API}/user/login`, {
+          data: userData,
+        })
         .then((res) => {
+          // console.log(res.message);
+          // if (res.status === 401) {
+          // if (res.message === "You don't have an account yet") {
+
+          // }
           if (res.data.token) {
             localStorage.setItem("accessToken", res.data.token);
             dispatch(loginAction);
@@ -161,6 +183,7 @@ function Login() {
         })
         .catch((err) => {
           console.log(err);
+          setErrMsg("등록되지 않은 회원입니다");
         });
     }
   };
@@ -173,6 +196,7 @@ function Login() {
             icon={faTimes}
             size="2x"
             onClick={() => dispatch(modalOff)}
+            color="#e5e5e5"
           />
         </CloseBtnContainer>
         <Title>로그인</Title>
@@ -194,11 +218,14 @@ function Login() {
             로그인
           </LoginBtn>
 
-          <GoogleBtn href="http://localhost:80/user/auth/google">
+          <GoogleBtn
+            href={process.env.REACT_APP_SERVER_API + `/user/auth/google`}
+          >
             {/* <FontAwesomeIcon icon={faGoogle} /> */}
             <GoogleIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/544px-Google_2015_logo.svg.png" />
           </GoogleBtn>
         </Form>
+        <Warning>{errMsg}</Warning>
       </ModalContainer>
     </DarkBackGround>
   );

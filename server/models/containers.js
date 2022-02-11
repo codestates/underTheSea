@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       size: DataTypes.INTEGER,
       theme: DataTypes.STRING,
       level: DataTypes.INTEGER,
+      last_lv_up: DataTypes.DATE,
     },
     {
       sequelize,

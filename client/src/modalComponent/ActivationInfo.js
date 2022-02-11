@@ -38,6 +38,9 @@ const ModalContainer = styled.div`
       cursor: pointer;
     }
   }
+  @media screen and (max-width: 750px) {
+    width: 90%;
+  }
 `;
 const ContentContainer = styled.div`
   width: 95%;
@@ -61,10 +64,8 @@ const ContentContainer = styled.div`
 const IconContainer = styled.div`
   width: 95%;
   height: 5%;
-  /* margin-top: 5px; */
   display: flex;
   justify-content: flex-end;
-  /* border: 1px solid red; */
 `;
 
 const ImgContainer = styled.div`
@@ -78,6 +79,9 @@ const ImgContainer = styled.div`
       margin-top: 7px;
       margin-bottom: 5px;
     }
+  }
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
   }
 `;
 const ImgContainer2 = styled.div`
@@ -94,6 +98,10 @@ const ImgContainer2 = styled.div`
 `;
 const Skimmer = styled.img`
   width: 30%;
+  @media screen and (max-width: 750px) {
+    width: 90%;
+    margin: auto;
+  }
 `;
 function ActivationInfo() {
   const dispatch = useDispatch();
@@ -106,6 +114,7 @@ function ActivationInfo() {
             <FontAwesomeIcon
               icon={faTimes}
               size="2x"
+              color="#e5e5e5"
               onClick={() => dispatch(modalOff)}
             />
           </div>
@@ -120,7 +129,7 @@ function ActivationInfo() {
           </p>
           <h2 className="structure">물맞댐 방법</h2>
           <ImgContainer>
-            <Skimmer src="물맞댐.png" />
+            <Skimmer src="https://iconmage.s3.ap-northeast-2.amazonaws.com/%EB%AC%BC%EB%A7%9E%EB%8C%90.png" />
             <p>
               <div className="sub-title">1. 수온맞댐</div>
               처음 포장해온 봉지 그대로 수조에 30분 ~ 1시간 가량 띄워주어 수온을
