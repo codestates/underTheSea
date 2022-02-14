@@ -220,10 +220,6 @@ const ButtonL = styled.button`
   border: 1px solid #108dee;
   background: #108dee;
 
-  @media screen and (min-width: 2000px) {
-    font-size: 1.2rem;
-  }
-
   @media screen and (max-width: 1024px) {
     font-size: 0.7rem;
   }
@@ -246,10 +242,6 @@ const ButtonR = styled.button`
   border-radius: 10px;
   border: 1px solid #cccccc;
   background: #cccccc;
-
-  @media screen and (min-width: 2000px) {
-    font-size: 1.2rem;
-  }
 
   @media screen and (max-width: 1024px) {
     font-size: 0.7rem;
