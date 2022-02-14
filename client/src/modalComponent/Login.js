@@ -23,7 +23,7 @@ const DarkBackGround = styled.div`
 
 const ModalContainer = styled.div`
   width: 25%;
-  height: 45%;
+  height: 50%;
   background: white;
   flex-direction: column;
   position: relative;
@@ -32,6 +32,10 @@ const ModalContainer = styled.div`
   border-radius: 20px;
   align-items: center;
   z-index: 999;
+  @media screen and (max-width: 900px) {
+    width: 350px;
+    height: 400px;
+  }
 
   @media screen and (max-width: 480px) {
     width: 300px;
@@ -66,7 +70,7 @@ const Title = styled.div`
 `;
 const Form = styled.form`
   width: 80%;
-  height: 40%;
+  /* height: 40%; */
   display: flex;
   flex-direction: column;
 `;
@@ -142,9 +146,9 @@ const GoogleIcon = styled.img`
 const Warning = styled.div`
   width: 80%;
   height: 30px;
-  margin-top: 40px;
+  display: flex;
+  align-items: center;
   color: red;
-  /* border: 1px solid red; */
 `;
 //=========================================================================
 
@@ -229,8 +233,8 @@ function Login() {
             {/* <FontAwesomeIcon icon={faGoogle} /> */}
             <GoogleIcon src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/544px-Google_2015_logo.svg.png" />
           </GoogleBtn>
+          <Warning>{errMsg}</Warning>
         </Form>
-        <Warning>{errMsg}</Warning>
       </ModalContainer>
     </DarkBackGround>
   );
