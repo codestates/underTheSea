@@ -14,7 +14,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-
+  z-index: -1;
   #flightPath {
     fill: none;
     stroke: blue;

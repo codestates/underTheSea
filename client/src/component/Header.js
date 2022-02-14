@@ -16,7 +16,7 @@ const Container = styled.div`
   height: 10vh;
   margin: auto;
   background: #d2f7ff;
-  box-shadow: 0px 0px 5px #adb5bd;
+  /* box-shadow: 0px 0px 5px #adb5bd; */
   position: relative;
   margin: auto;
   display: flex;
@@ -195,7 +195,6 @@ const BtnContainer = styled.div`
         flex-direction: column;
         height: 280px;
         margin-bottom: 2%;
-        z-index: 100;
       `}
   }
 `;

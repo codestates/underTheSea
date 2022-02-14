@@ -31,7 +31,11 @@ const ModalContainer = styled.div`
   display: flex;
   border-radius: 20px;
   align-items: center;
-  /* z-index: 9999; */
+  @media screen and (max-width: 480px) {
+    width: 300px;
+    height: 400px;
+    z-index: 99999;
+  }
 `;
 const CloseBtnContainer = styled.div`
   position: absolute;
@@ -66,44 +70,6 @@ const Form = styled.form`
   justify-content: space-between;
   flex-direction: column;
   /* border: 1px solid red; */
-`;
-const SignupSuccess = styled.div`
-  width: 80%;
-  height: 60%;
-  display: flex;
-  flex-direction: column;
-  /* border: 1px solid red; */
-`;
-const SignupSuccessText = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.25rem;
-  font-weight: bold;
-`;
-const CloseBtn = styled.button`
-  width: 100%;
-  height: 50px;
-  margin-bottom: 20px;
-  background: #108dee;
-  border-style: none;
-  padding: 10px;
-  border-radius: 4px;
-  color: white;
-  font-size: 1.25rem;
-  font-weight: bold;
-  position: relative;
-  :hover::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.07);
-  }
 `;
 
 const Username = styled.input`
