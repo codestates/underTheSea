@@ -193,7 +193,7 @@ const BtnContainer = styled.div`
         background: white;
         align-items: center;
         flex-direction: column;
-        height: 200px;
+        height: 280px;
         margin-bottom: 2%;
         z-index: 100;
       `}

@@ -146,9 +146,10 @@ const SearchTitle = styled.div`
 const LoginText = styled.div`
   margin-top: 5%;
   font-size: 1.2rem;
-
+  display: flex;
   @media screen and (max-width: 480px) {
-    font-size: 0.8rem;
+    font-size: 1rem;
+    justify-content: center;
   }
 `;
 
