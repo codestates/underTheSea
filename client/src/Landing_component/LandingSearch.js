@@ -189,7 +189,7 @@ function LandingSearch() {
         toggleActions: "play none restart pause",
       },
     });
-    tl.from(".manImg", { opacity: 0, x: 100, duration: 1 });
+    tl.from(".manImg", { opacity: 0, x: 10, duration: 1 });
   }, []);
 
   return (

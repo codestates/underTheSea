@@ -128,7 +128,7 @@ const SearchText = styled.div`
   font-family: "Kfont";
 
   @media screen and (max-width: 480px) {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 `;
 
