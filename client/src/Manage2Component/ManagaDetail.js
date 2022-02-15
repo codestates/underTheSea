@@ -455,11 +455,28 @@ const Table = styled.table`
   }
 `;
 
+const MobileTable = styled.table`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Tbody = styled.tbody``;
+
+const MobileTbody = styled.tbody`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Tr = styled.tr`
   display: flex;
   flex-direction: row;
+`;
+const MobileTr = styled.tr`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const DayNumber = styled.span`
   box-sizing: border-box;
@@ -1232,52 +1249,56 @@ function ManageDetail({ condata, setCondata }) {
             <Tbody>{calendarArr()}</Tbody>
           </Table>
         </CalendarContainer>
-        <MobileTd>
-          <MobileNumber onClick={handleMobileDate}>
-            {selectDate.slice(2, 4)}월 {selectDate.slice(4)}일
-          </MobileNumber>
-          <FoodIconContainer2>
-            <FoodInnerContainer>
-              <FoodTypeAndNum>
-                <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/펠렛.png" />
-                <FeedingNum>
-                  {finalList[selectDate] === undefined
-                    ? 0
-                    : finalList[selectDate][0]}
-                </FeedingNum>
-              </FoodTypeAndNum>
-              <FoodTypeAndNum>
-                <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/플레이크.png" />
-                <FeedingNum>
-                  {finalList[selectDate] === undefined
-                    ? 0
-                    : finalList[selectDate][1]}
-                </FeedingNum>
-              </FoodTypeAndNum>
-            </FoodInnerContainer>
-            <FoodInnerContainer>
-              <FoodTypeAndNum>
-                <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/냉동.png" />
-                <FeedingNum>
-                  {finalList[selectDate] === undefined
-                    ? 0
-                    : finalList[selectDate][2]}
-                </FeedingNum>
-              </FoodTypeAndNum>
-              <FoodTypeAndNum>
-                <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/생먹이.png" />
-                <FeedingNum>
-                  {finalList[selectDate] === undefined
-                    ? 0
-                    : finalList[selectDate][3]}
-                </FeedingNum>
-              </FoodTypeAndNum>
-            </FoodInnerContainer>
-          </FoodIconContainer2>
-          <ExWaterRecord2>{exWaterObj[selectDate]}L</ExWaterRecord2>
-        </MobileTd>
-        {/* ———————————————————— */}
-        {/* <ManageDetCard condata={condata} /> */}
+        <MobileTable>
+          <MobileTbody>
+            <MobileTr>
+              <MobileTd>
+                <MobileNumber onClick={handleMobileDate}>
+                  {selectDate.slice(2, 4)}월 {selectDate.slice(4)}일
+                </MobileNumber>
+                <FoodIconContainer2>
+                  <FoodInnerContainer>
+                    <FoodTypeAndNum>
+                      <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/펠렛.png" />
+                      <FeedingNum>
+                        {finalList[selectDate] === undefined
+                          ? 0
+                          : finalList[selectDate][0]}
+                      </FeedingNum>
+                    </FoodTypeAndNum>
+                    <FoodTypeAndNum>
+                      <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/플레이크.png" />
+                      <FeedingNum>
+                        {finalList[selectDate] === undefined
+                          ? 0
+                          : finalList[selectDate][1]}
+                      </FeedingNum>
+                    </FoodTypeAndNum>
+                  </FoodInnerContainer>
+                  <FoodInnerContainer>
+                    <FoodTypeAndNum>
+                      <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/냉동.png" />
+                      <FeedingNum>
+                        {finalList[selectDate] === undefined
+                          ? 0
+                          : finalList[selectDate][2]}
+                      </FeedingNum>
+                    </FoodTypeAndNum>
+                    <FoodTypeAndNum>
+                      <FoodIcon src="https://iconmage.s3.ap-northeast-2.amazonaws.com/생먹이.png" />
+                      <FeedingNum>
+                        {finalList[selectDate] === undefined
+                          ? 0
+                          : finalList[selectDate][3]}
+                      </FeedingNum>
+                    </FoodTypeAndNum>
+                  </FoodInnerContainer>
+                </FoodIconContainer2>
+                <ExWaterRecord2>{exWaterObj[selectDate]}L</ExWaterRecord2>
+              </MobileTd>
+            </MobileTr>
+          </MobileTbody>
+        </MobileTable>
       </OuterContainer>
       <FishCardContainer>
         {conInfo.fish_list.map((el, idx) => {

@@ -28,7 +28,7 @@ const ModalContainer = styled.div`
   border-radius: 20px;
   align-items: center;
   @media screen and (max-width: 480px) {
-    width: 60%;
+    width: 300px;
   }
 `;
 const CloseBtnContainer = styled.div`

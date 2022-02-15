@@ -31,7 +31,7 @@ const ModalContainer = styled.div`
   align-items: center;
   @media screen and (max-width: 480px) {
     width: 80%;
-    height: 80%;
+    height: 450px;
   }
 `;
 const CloseBtnContainer = styled.div`
