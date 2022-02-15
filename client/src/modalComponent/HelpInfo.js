@@ -30,7 +30,7 @@ const ModalContainer = styled.div`
   border-radius: 20px;
   @media screen and (max-width: 820px) {
     width: 80%;
-    height: 70%;
+    height: 580px;
     overflow: scroll;
   }
 `;
