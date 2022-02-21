@@ -1,8 +1,11 @@
 
 
 ## 🐬 < UnderTheSea > 관상어 정보 종합 제공 서비스  
-<img src="https://user-images.githubusercontent.com/85822658/154873854-a2bdeead-e7c5-43f3-be9d-3230ff622313.png" width="100%" height="280">
- 
+<div align="center">
+<img src="https://user-images.githubusercontent.com/85822658/154873854-a2bdeead-e7c5-43f3-be9d-3230ff622313.png" width="75%" height="300" >
+ </div> 
+
+</br>
 
 ## 📋 서비스 소개
 </br>
