@@ -1,29 +1,28 @@
 
 
-## LOGO
-![로고](https://cdn.discordapp.com/attachments/921036051819134996/926080243805089822/KakaoTalk_Photo_2021-12-30-20-51-40.png)
+## 🐬 < UnderTheSea > 관상어 정보 종합 제공 서비스  
+<img src="https://user-images.githubusercontent.com/85822658/154873854-a2bdeead-e7c5-43f3-be9d-3230ff622313.png" width="70%" height="280">
  
- UnderTheSea는 커뮤니티 활동은 부담스럽고 관상어에 관한 정보를 얻고 싶어하는 사람들을 위한 서비스입니다.
- </br>평소 키우고 싶었던 관상어를 찾아 검색해보고 간단한 사육정보를 확인할 수 있습니다.
- </br>언더더씨와 함께 작은 물속 세상을 만나보세요!🐟
+
+## 📋 서비스 소개
+</br>
+
+**언더더씨**는 쉽고 간편하게 어종의 정보를 검색하고 관리할 수 있게 해주는 서비스입니다. 
+
+</br> 사용자는 실제 자신이 기르는 물고리를 기반으로 관리페이지에서 수조를 등록하고 
+</br> 달력에 피딩 + 환수 기록을 남겨 관리할 수 있습니다. 
+</br> 물고기를 키워보고 싶다면
+</br> 
+언더더씨와 함께 작은 물속 세상을 만나보세요! 🐟
+
 - 해수어와 담수어를 기르기 위한 기초 사육정보조회
-- 입문자를 위한 물고기추천
-- 여러 개의 수조를 등록하여 여러 수조의 피딩, 환수기록 관리
-- 팁게시판을 통한 유저간 정보공유
+- 입문자를 위한 물고기 추천과 가이드
+- 여러 개의 수조를 등록하여 피딩, 환수기록 관리
+- 게시판을 통한 유저간 정보공유
 
 
 </br>
 </br>
-
-
-## 사용한 기술 스택
-
-
- ![사용스택](https://cdn.discordapp.com/attachments/924937469370200086/925978946741370920/Web_App_Reference_Architecture_5.png)
-
-</br>
-</br>
-
 
 ## Team(코드 팔레트) members 😎
 
@@ -44,6 +43,50 @@
 </br>
 </br>
 
+
+## 랜딩 페이지
+
+![gif](https://user-images.githubusercontent.com/85822658/154877399-6620f9da-3f42-42e0-8a54-3a4491c9c914.gif)
+
+</br>
+
+## 서비스 자세히 둘러보기
+
+
+### 🖥 [언더더씨 배포 링크](https://underthesea.ga/) </br>
+### 📒 [프로젝트 노션 페이지](https://codestates.notion.site/14-Code-Palette-UnderTheSea-1a0d69e3b1de40488745de4eef3752ef)
+
+ - 서비스의 시연 영상은 노션페이지를 참고해주세요!
+### 📄 [WiKi](https://github.com/codestates/underTheSea/wiki)
+ - 서비스의 자세한 상세 페이지는 위키를 참고해주세요!
+</br>
+
+</br>
+
+## 사용한 기술 스택
+
+</br>
+
+
+ ![사용스택](https://cdn.discordapp.com/attachments/924937469370200086/925978946741370920/Web_App_Reference_Architecture_5.png)
+
+
+</br></br></br></br>
+<div style="float:left">
+<img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=CSS3&logoColor=white " />
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white" />
+<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=black"/>
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"/>
+<img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=for-the-badge&logo=Amazon%20AWS&logoColor=white"/>
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"></br>
+<img src="https://img.shields.io/badge/express-CDE4DA?style=for-the-badge&logo=black">
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+<img src="https://img.shields.io/badge/redux-673AB7?style=for-the-badge&logo=black">
+<img src="https://img.shields.io/badge/styeld component-FA82BA?style=for-the-badge&logo=black">
+</div>
+
+
+</br></br>
 
 
 
