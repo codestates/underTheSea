@@ -35,9 +35,7 @@ module.exports = async (req, res) => {
         });
         return res
           .header("Authorization", req.headers.authorization)
-          .redirect(
-            `${process.env.REACT_APP_API_URL}/container/${container_id}/${month}`
-          );
+          .redirect(`https://yesjin.link/container/${container_id}/${month}`);
         // return res.status(201).json({
         //   data: { new_container_fish },
         //   message: "The fish is successfully added",
@@ -52,7 +50,7 @@ module.exports = async (req, res) => {
         return res
           .header("Authorization", req.headers.authorization)
           .redirect(
-            `${process.env.REACT_APP_API_URL}/container/info/${container_id}/${month}`
+            `https://yesjin.link/container/info/${container_id}/${month}`
           );
       }
     }

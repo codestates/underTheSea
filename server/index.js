@@ -26,9 +26,9 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://dhlgdv3s1nzv4.cloudfront.net/",
-      "https://underthesea.ga",
-      "https://www.underthesea.ga",
+      "https://d1vxn99hda5rup.cloudfront.net",
+      "https://underthesea.gq",
+      "https://www.underthesea.gq",
     ],
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "PATCH", "DELETE"],

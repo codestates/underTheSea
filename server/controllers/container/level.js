@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
           return res
             .header("Authorization", req.headers.authorization)
             .redirect(
-              `${process.env.REACT_APP_API_URL}/container/info/${container_id}/${month}`
+              `https://yesjin.link/container/info/${container_id}/${month}`
             );
         } else {
           await container.increment("level", { by: 10 });
@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
           return res
             .header("Authorization", req.headers.authorization)
             .redirect(
-              `${process.env.REACT_APP_API_URL}/container/info/${container_id}/${month}`
+              `https://yesjin.link/container/info/${container_id}/${month}`
             );
           // return res.status(200).json({
           //   message: `The container is successfully leveled up`,
@@ -46,7 +46,7 @@ module.exports = async (req, res) => {
         return res
           .header("Authorization", req.headers.authorization)
           .redirect(
-            `${process.env.REACT_APP_API_URL}/container/info/${container_id}/${month}`
+            `https://yesjin.link/container/info/${container_id}/${month}`
           );
         // return res.status(200).json({
         //   message: "You've already leveled up this week",

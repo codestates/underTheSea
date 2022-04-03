@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
         return res
           .header("Authorization", req.headers.authorization)
           .redirect(
-            `${process.env.REACT_APP_API_URL}/container/info/${container_id}/${month}`
+            `https://yesjin.link/container/info/${container_id}/${month}`
           );
       }
     }

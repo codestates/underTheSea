@@ -19,9 +19,7 @@ module.exports = async (req, res) => {
       await ex_waters.create({ container_id, amount });
       return res
         .header("Authorization", req.headers.authorization)
-        .redirect(
-          `${process.env.REACT_APP_API_URL}/container/${container_id}/${month}`
-        );
+        .redirect(`https://yesjin.link/container/${container_id}/${month}`);
     }
   }
 };
